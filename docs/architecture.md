@@ -10,17 +10,19 @@ browser: the Schedule status (open now, next Aarti) and the Sheet data (Events a
  src/components ───┼─> src/pages/index.astro ─> dist/ ──> scripts/live.ts    → status chip, Today strip, next Aarti (every 30 s)
  src/styles (DS) ──┤        (static HTML)              ──> scripts/events.ts  → fetch Events CSV   → cards / empty / error
  src/assets ───────┘  (images → WebP)                  ──> scripts/meter.ts   → fetch Settings CSV → meter or hidden
-                                                       ──> carousel.ts, live-darshan.ts (Twitch on tap), seva.ts (PayPal)
+                                                       ──> scripts/highlights.ts → fetch Highlights CSV → slides or band hidden
+                                                       ──> vachan.ts, live-darshan.ts (Twitch on tap), seva.ts (PayPal)
 ```
 
 ## Modules
 | Path | Role | Rule |
 |---|---|---|
-| `src/data/` | site, schedule, sevas, giving, visit and moments content | the only place to edit content outside the Sheet |
+| `src/data/` | site, schedule, sevas, giving and visit content | the only place to edit content outside the Sheet |
 | `src/lib/` | pure TS: `time`, `schedule`, `events`, `settings`, `csv`, `ics`, `links` | no DOM; fully unit-tested; Pacific time |
 | `src/scripts/` | thin browser glue calling `src/lib` | DOM only; no business rules |
 | `src/components/` | one `.astro` per design-system component | markup copied from DS previews |
-| `src/styles/` | `tokens.css`, `bundle.css` from the DS | never edited here |
+| `src/styles/` | `bundle.css` copied from the DS; `tokens.css` generated | never edited here |
+| `design-system/` | DS sources: `tokens.json` (input to `tools/tokens-to-css.mjs`), `bundle.js` and `index.d.ts` (reference for the `src/lib` port) | replaced wholesale on a DS re-sync |
 | `public/` | DS images and icons, `_redirects`, `_headers`, `demo/*.csv` | |
 
 ## Sheet data flow

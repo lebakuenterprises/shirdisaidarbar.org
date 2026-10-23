@@ -30,6 +30,10 @@ _Avoid_: timings table, calendar
 A dated, one-off happening at the Darbar posted by an admin, which disappears after its end date. A happening that recurs (for example the monthly Satyanarayana Puja) is one Event per occurrence.
 _Avoid_: announcement, programme, recurring event
 
+**Highlight**:
+A time-limited slide the admin posts to promote one thing (an Event, a campaign, an update, a photo). It points at that thing and is never the only place its details live.
+_Avoid_: banner, slide (alone), announcement
+
 ## Giving
 
 **Seva**:

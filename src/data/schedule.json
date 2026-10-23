@@ -1,0 +1,15 @@
+{
+  "aartis": [
+    { "id": "kakad", "name": "Kakad Aarti", "hint": "Morning awakening", "time": "06:45" },
+    { "id": "madhyan", "name": "Madhyan Aarti", "hint": "Midday", "time": "12:00" },
+    { "id": "dhoop", "name": "Dhoop Aarti", "hint": "Evening", "time": "18:30" },
+    { "id": "shej", "name": "Shej Aarti", "hint": "Night rest", "time": "20:30" }
+  ],
+  "hours": [
+    { "label": "Thursday, Saturday and Sunday", "days": [4, 6, 0], "windows": [["07:00", "21:00"]] },
+    { "label": "Monday, Tuesday, Wednesday and Friday", "days": [1, 2, 3, 5], "windows": [["07:00", "09:00"], ["12:00", "13:00"], ["18:30", "21:00"]] }
+  ],
+  "note": "Saturdays: Shani oil abhishek from 9:00 AM to 9:00 PM.",
+  "liveMinutes": 45,
+  "soonMinutes": 30
+}

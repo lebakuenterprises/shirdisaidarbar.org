@@ -13,6 +13,8 @@ One-page, mobile-first website for Shirdi Sai Darbar (Sunnyvale), a static Astro
 - `npm test`: Vitest unit tests
 - `npm run build`: fails while `TODO:` links remain; `ALLOW_PLACEHOLDERS=1 npm run build` for a demo build
 - `npx playwright test`: smoke tests against `npm run preview`
+- `node tools/tokens-to-css.mjs`: regenerate `src/styles/tokens.css` after replacing `design-system/tokens.json`
+- Set `ASTRO_TELEMETRY_DISABLED=1` in CI. New dependencies: exact versions at least 2 weeks old.
 
 ## Hard rules
 - Design-system fidelity: copy markup from its component previews; `tokens.css`/`bundle.css` are verbatim copies, never edited here.

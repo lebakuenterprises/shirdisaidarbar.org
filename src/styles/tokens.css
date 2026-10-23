@@ -1,0 +1,194 @@
+/* Shirdi Sai Darbar — generated from tokens.json by tools/tokens-to-css.mjs. Do not edit. */
+
+:root, [data-theme="day"] {
+  --surface: #FBF7EF;
+  --surface-raised: #FFFDF8;
+  --surface-sunken: #F3E9DA;
+  --glow-soft: #F8E6CF;
+  --sanctum: #140C08;
+  --ink: #2B1E1A;
+  --ink-muted: #6B605A;
+  --heading: #8C2416;
+  --link: #A8460B;
+  --action: #8C2416;
+  --action-hover: #741C11;
+  --on-action: #FFF9F0;
+  --saffron: #E87915;
+  --on-saffron: #2B1E1A;
+  --saffron-ui: #D4640F;
+  --sindoor: #8C2416;
+  --gold: #C9A24A;
+  --gold-light: #E3C27A;
+  --marigold: #F2A93B;
+  --leaf: #3F6B35;
+  --on-sanctum: #FFF6EA;
+  --on-sanctum-muted: #E9D6BE;
+  --action-sanctum: #EE8A2E;
+  --line: #E6DAC6;
+  --line-strong: #8E7D70;
+  --focus: #8C2416;
+  --open: #2E6A3E;
+  --danger: #B3261E;
+  --live: var(--danger);
+  --selection: #F6D3AE;
+  --halo: rgba(232, 121, 21, 0.30);
+  --scrim: rgba(20, 14, 11, 0.82);
+  --on-media: #FFF9F0;
+  --shadow-soft: 0 1px 2px rgba(43, 30, 26, 0.05), 0 6px 20px rgba(43, 30, 26, 0.06);
+  --shadow-bar: 0 -6px 20px rgba(43, 30, 26, 0.08);
+  --shadow-md: 0 1px 2px rgba(43, 30, 26, 0.06), 0 12px 32px rgba(43, 30, 26, 0.12);
+  --shadow-glow: 0 0 0 6px rgba(238, 138, 46, 0.18);
+}
+
+[data-theme="night"] {
+  --surface: #140E0B;
+  --surface-raised: #1E1612;
+  --surface-sunken: #281D18;
+  --glow-soft: #33231A;
+  --sanctum: #140C08;
+  --ink: #F3E7D8;
+  --ink-muted: #B9A898;
+  --heading: #F6D9B8;
+  --link: #F4A65A;
+  --action: #EE8A2E;
+  --action-hover: #F29B47;
+  --on-action: #1A110C;
+  --saffron: #E87915;
+  --on-saffron: #2B1E1A;
+  --saffron-ui: #EE8A2E;
+  --sindoor: #A63323;
+  --gold: #D9AE5C;
+  --gold-light: #E3C27A;
+  --marigold: #F7B955;
+  --leaf: #5E8F52;
+  --on-sanctum: #FFF6EA;
+  --on-sanctum-muted: #E9D6BE;
+  --action-sanctum: #EE8A2E;
+  --line: #3A2C24;
+  --line-strong: #7A6A5D;
+  --focus: #EE8A2E;
+  --open: #7FC28F;
+  --danger: #F08A7E;
+  --live: var(--danger);
+  --selection: #5A3A22;
+  --halo: rgba(238, 138, 46, 0.26);
+  --scrim: rgba(14, 9, 7, 0.85);
+  --on-media: #FFF9F0;
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-bar: 0 -6px 20px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 0 6px rgba(238, 138, 46, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) {
+    --surface: #140E0B;
+    --surface-raised: #1E1612;
+    --surface-sunken: #281D18;
+    --glow-soft: #33231A;
+    --sanctum: #140C08;
+    --ink: #F3E7D8;
+    --ink-muted: #B9A898;
+    --heading: #F6D9B8;
+    --link: #F4A65A;
+    --action: #EE8A2E;
+    --action-hover: #F29B47;
+    --on-action: #1A110C;
+    --saffron: #E87915;
+    --on-saffron: #2B1E1A;
+    --saffron-ui: #EE8A2E;
+    --sindoor: #A63323;
+    --gold: #D9AE5C;
+    --gold-light: #E3C27A;
+    --marigold: #F7B955;
+    --leaf: #5E8F52;
+    --on-sanctum: #FFF6EA;
+    --on-sanctum-muted: #E9D6BE;
+    --action-sanctum: #EE8A2E;
+    --line: #3A2C24;
+    --line-strong: #7A6A5D;
+    --focus: #EE8A2E;
+    --open: #7FC28F;
+    --danger: #F08A7E;
+    --live: var(--danger);
+    --selection: #5A3A22;
+    --halo: rgba(238, 138, 46, 0.26);
+    --scrim: rgba(14, 9, 7, 0.85);
+    --on-media: #FFF9F0;
+    --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+    --shadow-bar: 0 -6px 20px rgba(0, 0, 0, 0.45);
+    --shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 0 6px rgba(238, 138, 46, 0.22);
+  }
+  :root:not([data-theme="day"]) { color-scheme: dark; }
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-pill: 999px;
+  --content-max: 1120px;
+  --measure: 65ch;
+  --touch-min: 48px;
+  --header-h: 64px;
+  --actionbar-h: 64px;
+  --hero-min: 640px;
+  --today-overlap: 64px;
+  --toran-h: 30px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+  --bp-hero-split: 1100px;
+  --dur-quick: 150ms;
+  --dur-calm: 400ms;
+  --dur-flicker: 2400ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --z-header: 10;
+  --z-actionbar: 20;
+  --z-menu: 30;
+  --font-display: "Tiro Devanagari Hindi", "Tiro Tamil", "Tiro Telugu", Georgia, "Times New Roman", serif;
+  --font-sans: "Anek Latin", "Anek Devanagari", "Anek Tamil", "Anek Telugu", "Noto Sans", system-ui, sans-serif;
+}
+
+.display { font-family: var(--font-display); font-size: 40px; line-height: 44px; font-weight: 400; letter-spacing: -0.01em; }
+
+.display-lg { font-family: var(--font-display); font-size: 64px; line-height: 68px; font-weight: 400; letter-spacing: -0.015em; }
+
+.section-title { font-family: var(--font-display); font-size: 32px; line-height: 38px; font-weight: 400; }
+
+.section-title-lg { font-family: var(--font-display); font-size: 44px; line-height: 50px; font-weight: 400; }
+
+.figure { font-family: var(--font-display); font-size: 40px; line-height: 44px; font-weight: 400; }
+
+.vachan { font-family: var(--font-display); font-size: 26px; line-height: 36px; font-weight: 400; font-style: italic; }
+
+.signoff { font-family: var(--font-display); font-size: 30px; line-height: 40px; font-weight: 400; }
+
+.hero-mantra { font-family: var(--font-display); font-size: 22px; line-height: 30px; font-weight: 400; letter-spacing: 0.02em; }
+
+.kicker { font-family: var(--font-sans); font-size: 16px; line-height: 22px; font-weight: 600; }
+
+.title { font-family: var(--font-sans); font-size: 22px; line-height: 28px; font-weight: 600; }
+
+.lead { font-family: var(--font-sans); font-size: 20px; line-height: 32px; font-weight: 400; }
+
+.body { font-family: var(--font-sans); font-size: 18px; line-height: 29px; font-weight: 400; }
+
+.body-strong { font-family: var(--font-sans); font-size: 18px; line-height: 29px; font-weight: 600; }
+
+.time { font-family: var(--font-sans); font-size: 20px; line-height: 28px; font-weight: 600; }
+
+.button { font-family: var(--font-sans); font-size: 17px; line-height: 20px; font-weight: 600; }
+
+.small { font-family: var(--font-sans); font-size: 16px; line-height: 24px; font-weight: 400; }
+
+.label { font-family: var(--font-sans); font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 0.08em; }
+

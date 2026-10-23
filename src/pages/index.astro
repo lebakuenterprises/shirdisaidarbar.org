@@ -1,0 +1,14 @@
+---
+// M1 foundation page: proves the design-system styles, data and Schedule logic render. The 11 sections arrive in M2.
+import Base from '../layouts/Base.astro';
+import schedule from '../data/schedule.json';
+import { formatTime } from '../lib/time';
+---
+<Base title="Shirdi Sai Darbar · Shirdi Sai Baba temple in Sunnyvale" description="A volunteer-run Shirdi Sai Baba mandir in Sunnyvale, California.">
+  <main class="sd-stage">
+    <h1 class="display">Baba's home in the Bay Area</h1>
+    <ol>
+      {schedule.aartis.map((a) => <li>{a.name}, {formatTime(a.time)}</li>)}
+    </ol>
+  </main>
+</Base>

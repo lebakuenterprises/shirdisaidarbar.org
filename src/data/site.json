@@ -1,0 +1,30 @@
+{
+  "name": "Shirdi Sai Darbar",
+  "url": "https://shirdisaidarbar.org",
+  "address": { "street": "255 San Geronimo Way", "city": "Sunnyvale", "region": "CA", "postal": "94085" },
+  "phone": { "display": "408-482-0089", "e164": "+14084820089", "note": "text or WhatsApp only" },
+  "email": "saiseva@shirdisaidarbar.org",
+  "ein": "27-3235464",
+  "twitchChannel": "shirdisaidarbarsunnyvale",
+  "sheet": {
+    "eventsCsv": "",
+    "settingsCsv": ""
+  },
+  "construction": { "goal": 3000000, "vision": 10000000 },
+  "links": {
+    "paypal": "https://www.paypal.com/donate?token=aTQJnhEg6msZ_GGo6JN1CpbS1kAFwoyrWq3eNLFMYlnJhl8kv1kl9jpl057TVE49ieie25Yb03iZ2ruF",
+    "whatsappCommunity": "TODO:WhatsApp Community invite",
+    "volunteerForm": "TODO:Volunteer signup form",
+    "priestService": "sms:+14084820089",
+    "paybee": "https://paybee.io/quickpay.html?handle=ssd_paybee#campaignList",
+    "walkthrough": "https://youtu.be/IHSg9r0oJ9U",
+    "donorLevels": "https://new-temple-construction.shirdisaidarbar.org/",
+    "shop": "https://shop.shirdisaidarbar.org/",
+    "photos": "TODO:Google Photos album",
+    "calendarPdf": "/pdf/Calendar_2026.pdf",
+    "sisterTemple": "https://bayareahindutemple.org/",
+    "facebook": "https://www.facebook.com/shirdisaidarbarSunnyvale",
+    "youtube": "https://www.youtube.com/user/shirdisaidarbar",
+    "twitch": "https://www.twitch.tv/shirdisaidarbarsunnyvale"
+  }
+}

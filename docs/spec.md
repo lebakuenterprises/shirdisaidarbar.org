@@ -19,10 +19,10 @@ volunteer (WhatsApp, signup), admin (posts Events from a phone in under 5 minute
 | 1 | Header | seal mark, name, anchors (Visit · Events · Live · Connect), Donate | site.json |
 | 2 | Hero + Today strip | murti full-bleed in sanctum, kicker श्रद्धा · सबुरी, headline, status chip, next Aarti countdown, Get directions / Watch live | schedule.json |
 | 3 | Build Baba's temple | appeal, meter toward $3M (of $10M), walkthrough video, donor levels | Sheet: Settings |
-| 4 | Today at the Darbar | four Aartis, hours by weekday (multi-window), Shani note, today highlighted | schedule.json |
-| 5 | Upcoming events | up to 6 cards: pinned first, then by date; hidden after end date; Add to calendar, WhatsApp group, Sponsor, flyer | Sheet: Events |
-| 6 | Live darshan + Baba's words | Twitch poster, player loads on tap only; vachan | site.json |
-| 7 | Moments at the Darbar | manual carousel, 4–8 real temple photos, captions below | moments.json |
+| 4 | Highlights | carousel of up to 8 admin slides (Event, Campaign, Update, Highlight), pinned first, hidden after end date, manual (no autoplay); "See all photos" album link; band hides when empty | Sheet: Highlights |
+| 5 | Today at the Darbar | four Aartis, hours by weekday (multi-window), Shani note, today highlighted | schedule.json |
+| 6 | Upcoming events | up to 6 cards: pinned first, then by date; hidden after end date; Add to calendar, WhatsApp group, Sponsor, flyer | Sheet: Events |
+| 7 | Live darshan + Baba's words | Twitch poster, player loads on tap only; Baba's eleven assurances, starting on the day's, with Pause | site.json |
 | 8 | Ways to give | Seva choice → PayPal hand-off; other ways (Zelle, check, card, stock, company match, Paybee); EIN | sevas.json, giving.json |
 | 9 | Stay connected | WhatsApp Community, volunteer signup, Facebook, YouTube | site.json |
 | 10 | Plan your visit | photo, address, Get directions, Before-you-visit guidelines | visit.json |
@@ -38,12 +38,13 @@ Also `/privacy` and a 404 page. Old URLs redirect to section anchors (`_redirect
 | Recurring happenings | One Event row per occurrence; no repeat rules |
 | DS logic | bundle.js helpers ported to typed TS with unit tests; CSS and tokens copied verbatim |
 | Missing links | `TODO:<label>` placeholders in data files; dev-only badge; production build fails while any remain |
-| Photos | Venkat supplies originals; Astro converts to WebP at build |
+| Highlights | Follows DS v2: a third Sheet tab replaces the planned photo carousel. Temple photos seed the demo slides; the album is a link (Google Photos can't feed websites since 2025-03-31) |
 | Giving | One PayPal checkout (general and per Seva); Paybee only for Event Sponsorships |
 
 ## Event fields (Sheet "Events" tab, fed by the Google Form)
 Title*, Start date*, Start time, End date*, End time, Description*, Flyer image link, WhatsApp group link,
 Signup or sponsor link, Pin to top (Yes/No). * = required. Settings tab: `raised` (blank hides the meter), `goal`.
+Highlights tab: kind*, title* (≤60), line* (≤120), when, image, alt (with an image), button (fixed label list), link, start, end*, order, pinned.
 
 ## Non-functional requirements
 - Mobile-first from 320px, no horizontal scroll; 48px touch targets; 18px body.
