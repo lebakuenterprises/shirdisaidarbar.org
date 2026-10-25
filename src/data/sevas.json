@@ -1,0 +1,11 @@
+{
+  "note": "Each option may carry its own PayPal link; empty means the general link in site.json. Amounts are left to PayPal until the temple sets presets.",
+  "options": [
+    { "id": "general", "name": "General donation", "desc": "Daily puja, flowers and upkeep of the Darbar", "paypal": "" },
+    { "id": "temple", "name": "Build Baba's temple", "desc": "The marble temple and Annadanam hall", "paypal": "" },
+    { "id": "annadanam", "name": "Thursday Annadanam", "desc": "Prasad meal for devotees after aarti", "paypal": "" },
+    { "id": "robe", "name": "Baba's robe", "desc": "A new vastra offered at the murti", "paypal": "" },
+    { "id": "palki", "name": "Palki seva", "desc": "Thursday palanquin procession", "paypal": "" },
+    { "id": "aarti", "name": "Sponsor an aarti", "desc": "Kakad, Madhyan, Dhoop or Shej, in your family's name", "paypal": "" }
+  ]
+}

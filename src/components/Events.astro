@@ -1,0 +1,48 @@
+---
+// Upcoming events, rendered in the browser from the Sheet's Events tab (src/scripts/events.ts).
+import Icon from './Icon.astro';
+import SectionHead from './SectionHead.astro';
+import { site } from '../lib/site';
+interface Props { src: string }
+const { src } = Astro.props;
+---
+<section class="sd-band sd-kolam" id="events" aria-labelledby="events-h"><div class="sd-band__in" data-sd-events data-src={src}>
+  <div class="sd-events__head">
+    <SectionHead id="events-h" title="Upcoming events" lead="Festivals, pujas and seva days at the Darbar. Every notice reaches WhatsApp first." />
+    <a class="sd-btn sd-btn--secondary" href={site.links.whatsapp}><Icon name="whatsapp-logo" />Join on WhatsApp</a>
+  </div>
+  <p class="sd-loading" data-state="loading"><Icon name="flower-lotus" />Loading events</p>
+  <div class="sd-events__list" data-state="list" hidden>
+    <div data-f="featured"></div>
+    <div class="sd-grid-2" data-f="grid"></div>
+  </div>
+  <div class="sd-empty" data-state="empty" hidden>
+    <Icon name="flower-lotus" />
+    <p>No events are posted right now. Join us on WhatsApp to hear first.</p>
+    <a class="sd-btn sd-btn--secondary" href={site.links.whatsapp}><Icon name="whatsapp-logo" />Join on WhatsApp</a>
+  </div>
+  <div class="sd-notice" role="status" data-state="error" hidden>
+    <Icon name="info" />
+    <div><strong>Events could not load just now</strong><span>Please try again in a few minutes, or <a href={site.links.whatsapp}>join us on WhatsApp</a> for every notice.</span></div>
+  </div>
+  <noscript><p class="sd-small">Turn on JavaScript to see upcoming events, or join the WhatsApp community below.</p></noscript>
+  <p class="sd-small sd-events__foot"><a href={site.links.calendarPdf}>Download the 2026 temple calendar (PDF)</a></p>
+
+  <template data-event-card>
+    <article class="sd-card sd-event">
+      <div class="sd-event__date" aria-hidden="true"><span class="sd-label" data-f="month"></span><span class="sd-event__day" data-f="day"></span><span class="sd-event__wd" data-f="weekday"></span></div>
+      <div class="sd-event__body">
+        <span class="sd-tag sd-tag--start" data-f="tag"></span>
+        <h3 class="sd-h3"><a class="sd-event__link" data-f="title"></a></h3>
+        <p class="sd-event__meta"><span><Icon name="calendar-blank" /><time data-f="date"></time></span><span data-f="time-wrap"><Icon name="clock" /><span data-f="time"></span></span></p>
+        <p data-f="description"></p>
+      </div>
+      <div class="sd-event__actions">
+        <button class="sd-btn sd-btn--quiet" type="button" data-a="calendar"><Icon name="calendar-plus" />Add to calendar</button>
+        <a class="sd-btn sd-btn--quiet" data-a="whatsapp"><Icon name="whatsapp-logo" />WhatsApp group</a>
+        <a class="sd-btn sd-btn--quiet" data-a="signup"><Icon name="hand-heart" /><span data-f="signup-label">Sponsor</span></a>
+        <a class="sd-btn sd-btn--quiet" data-a="flyer"><Icon name="arrow-right" />See flyer</a>
+      </div>
+    </article>
+  </template>
+</div></section>

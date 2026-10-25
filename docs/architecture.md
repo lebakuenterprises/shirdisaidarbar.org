@@ -6,24 +6,26 @@ browser: the Schedule status (open now, next Aarti) and the Sheet data (Events a
 ```
  build time (npm run build)                          browser (page load)
  ─────────────────────────                           ───────────────────
- src/data/*.json ──┐                                  schedule data (inlined JSON)
- src/components ───┼─> src/pages/index.astro ─> dist/ ──> scripts/live.ts    → status chip, Today strip, next Aarti (every 30 s)
- src/styles (DS) ──┤        (static HTML)              ──> scripts/events.ts  → fetch Events CSV   → cards / empty / error
- src/assets ───────┘  (images → WebP)                  ──> scripts/meter.ts   → fetch Settings CSV → meter or hidden
-                                                       ──> scripts/highlights.ts → fetch Highlights CSV → slides or band hidden
-                                                       ──> vachan.ts, live-darshan.ts (Twitch on tap), seva.ts (PayPal)
+ src/data/*.json ──┐                                  inline head script → Day/Night theme before paint (localStorage, else device)
+ src/components ───┼─> src/pages/index.astro ─> dist/ ──> scripts/header.ts  → theme switch, Menu, section scroll-spy
+                   │                                   ──> scripts/live.ts    → day line, Aarti list, week tiles, hero buttons (every 30 s)
+ src/styles (DS) ──┘        (static HTML)              ──> scripts/events.ts  → fetch Events CSV   → featured card + cards / empty / error
+                                                       ──> scripts/meter.ts   → fetch Settings CSV → meter or hidden
+                                                       ──> vachan.ts; Twitch and YouTube on tap, Seva → PayPal in main.ts
 ```
 
 ## Modules
 | Path | Role | Rule |
 |---|---|---|
 | `src/data/` | site, schedule, sevas, giving and visit content | the only place to edit content outside the Sheet |
-| `src/lib/` | pure TS: `time`, `schedule`, `events`, `settings`, `csv`, `ics`, `links` | no DOM; fully unit-tested; Pacific time |
-| `src/scripts/` | thin browser glue calling `src/lib` | DOM only; no business rules |
-| `src/components/` | one `.astro` per design-system component | markup copied from DS previews |
+| `src/lib/` | pure TS: `time`, `schedule`, `dayline`, `events`, `settings`, `csv`, `ics`, `links`, `site` | no DOM; unit-tested; Pacific time |
+| `src/scripts/` | thin browser glue calling `src/lib`; `main.ts` is the one entry | DOM only; no business rules |
+| `src/components/` | one `.astro` per page section; `Icon`, `Flame` (DS dhuni mark), `SectionHead`, `DoorwayFrame`; gold line drawings (`ThaliDrawing`, `KolamThreshold`) | markup from the DS previews; drawings share `.sd-drawing__line` |
+| `src/styles/site.css` | the page layer over the DS (day line, menu, doorways, band motifs, week arches, featured event, dev TODO labels); see DESIGN.md | tokens only |
 | `src/styles/` | `bundle.css` copied from the DS; `tokens.css` generated | never edited here |
 | `design-system/` | DS sources: `tokens.json` (input to `tools/tokens-to-css.mjs`), `bundle.js` and `index.d.ts` (reference for the `src/lib` port) | replaced wholesale on a DS re-sync |
-| `public/` | DS images and icons, `_redirects`, `_headers`, `demo/*.csv` | |
+| `public/` | DS images and icons (the hero's Day and Night photos), the Visit street map `img/visit-map.svg`, `_redirects`, `_headers`, `demo/*.csv` | |
+| `tools/` | `tokens-to-css.mjs`; `osm-map.mjs` draws the Visit map from OpenStreetMap, run once and committed | not part of the build |
 
 ## Sheet data flow
 1. Admin submits the Google Form → a row lands in the Events tab (or edits the Settings tab).
@@ -31,7 +33,8 @@ browser: the Schedule status (open now, next Aarti) and the Sheet data (Events a
 3. `events.ts` fetches `site.json → sheet.eventsCsv`, `csv.ts` parses it, and `events.visibleEvents()` drops Events past their end date
    (Pacific), sorts pinned first then by start, and caps at 6.
 4. Failure states: loading → empty ("No events are posted right now", WhatsApp link) → error ("Events could not load just now").
-5. If no CSV URL is set in dev, it falls back to `public/demo/*.csv`.
+5. If no CSV URL is set, dev and `ALLOW_PLACEHOLDERS=1` builds fall back to `public/demo/*.csv` (decided in `src/pages/index.astro`).
+6. The meter fails quietly (stays hidden); Events show the could-not-load notice.
 
 ## Build guard
 An Astro integration fails `astro build` if any `TODO:` link remains in `src/data`, unless `ALLOW_PLACEHOLDERS=1`.

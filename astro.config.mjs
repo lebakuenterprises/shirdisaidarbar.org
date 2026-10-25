@@ -5,4 +5,6 @@ export default defineConfig({
   site: 'https://shirdisaidarbar.org',
   output: 'static',
   trailingSlash: 'ignore',
+  // The dev toolbar would sit over the page during demos to the temple.
+  devToolbar: { enabled: false },
 });

@@ -1,0 +1,13 @@
+---
+// A kolam doorstep: the dot-and-loop line drawn at a mandir threshold, repeated across the width.
+---
+<svg class="sd-threshold" height="24" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="sd-kolam-step" width="32" height="24" patternUnits="userSpaceOnUse">
+      <path class="sd-drawing__line" d="M0 12C4 4 12 4 16 12C20 20 28 20 32 12M0 12C4 20 12 20 16 12C20 4 28 4 32 12"></path>
+      <circle class="sd-threshold__dot" cx="8" cy="12" r="1.6"></circle>
+      <circle class="sd-threshold__dot" cx="24" cy="12" r="1.6"></circle>
+    </pattern>
+  </defs>
+  <rect width="100%" height="24" fill="url(#sd-kolam-step)"></rect>
+</svg>

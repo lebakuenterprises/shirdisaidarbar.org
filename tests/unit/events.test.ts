@@ -42,6 +42,11 @@ describe('parseEvents', () => {
     expect(e?.signup).toBeUndefined();
   });
 
+  it('accepts a flyer kept on this site, but not a protocol-relative link', () => {
+    const csv = 'Title,Start date,End date,Flyer image link\nA,2026-11-15,2026-11-15,/img/flyer.webp\nB,2026-11-15,2026-11-15,//evil.example/x.png';
+    expect(parseEvents(csv).map((e) => e.flyer)).toEqual(['/img/flyer.webp', undefined]);
+  });
+
   it('gives repeated titles distinct anchors by date (one row per occurrence)', () => {
     const csv = 'Title,Start date,End date\nMonthly Group Satyanarayana Puja,2026-11-15,2026-11-15\nMonthly Group Satyanarayana Puja,2026-12-13,2026-12-13';
     expect(parseEvents(csv).map((e) => e.id)).toEqual([

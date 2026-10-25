@@ -1,0 +1,10 @@
+{
+  "ways": [
+    { "icon": "phone", "name": "Zelle", "summary": "donations@shirdisaidarbar.org", "text": "Send to **donations@shirdisaidarbar.org** or **408-482-0089**. Add the seva in the memo." },
+    { "icon": "envelope-simple", "name": "Check", "summary": "Payable to Shirdi Sai Darbar", "text": "Drop it in the hundi, or mail it to 255 San Geronimo Way, Sunnyvale, CA 94085." },
+    { "icon": "credit-card", "name": "Card at the temple", "summary": "The lobby terminal", "text": "Use the card terminal in the lobby during temple hours." },
+    { "icon": "chart-line-up", "name": "Stock", "summary": "Charles Schwab, DTC 0164", "text": "Account **5456-3049**, for Shirdi Sai Darbar. Email saiseva@shirdisaidarbar.org so we can thank you." },
+    { "icon": "buildings", "name": "Company match", "summary": "Many employers double your gift", "text": "Give, then ask your employer's giving portal to match it, using EIN 27-3235464." },
+    { "icon": "calendar-plus", "name": "Festival sponsorships", "summary": "On Paybee", "text": "Each festival's sponsorships are listed on Paybee.", "link": "paybee", "label": "See current sponsorships" }
+  ]
+}

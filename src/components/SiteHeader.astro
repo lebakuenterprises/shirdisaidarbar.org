@@ -1,0 +1,31 @@
+---
+// Sticky header: brand, the sections in page order (a Menu on narrower screens), the Day/Night switch and Donate.
+import Icon from './Icon.astro';
+
+const sections = [
+  { id: 'temple', label: 'Temple' },
+  { id: 'live', label: 'Live' },
+  { id: 'give', label: 'Give' },
+  { id: 'events', label: 'Events' },
+  { id: 'visit', label: 'Visit' },
+];
+const home = Astro.url.pathname === '/';
+const to = (id: string) => (home ? `#${id}` : `/#${id}`);
+---
+<a class="sd-skip" href="#main">Skip to content</a>
+<header class="sd-header"><div class="sd-header__in">
+  <a class="sd-brand" href="/"><span class="sd-brand__mark"><img src="/img/mark-160.png" width="40" height="40" alt="" /></span>Shirdi Sai Darbar</a>
+  <nav class="sd-nav sd-nav--wide" aria-label="Sections">
+    {sections.map((s) => <a href={to(s.id)} data-spy={s.id}>{s.label}</a>)}
+  </nav>
+  <details class="sd-menu" data-sd-menu>
+    <summary aria-label="Menu"><Icon name="list" /><span>Menu</span></summary>
+    <nav class="sd-menu__panel" aria-label="Sections">
+      {sections.map((s) => <a href={to(s.id)} data-spy={s.id}>{s.label}</a>)}
+    </nav>
+  </details>
+  <button class="sd-theme" type="button" data-sd-theme aria-label="Switch to the night theme" title="Day or night theme">
+    <span class="sd-theme__day"><Icon name="moon" /></span><span class="sd-theme__night"><Icon name="sun" /></span>
+  </button>
+  <a class="sd-btn sd-btn--primary" href={to('give')}><Icon name="hand-heart" />Donate</a>
+</div></header>

@@ -1,0 +1,9 @@
+---
+import Icon from './Icon.astro';
+import { directionsUrl } from '../lib/site';
+---
+<nav class="sd-actionbar" aria-label="Quick actions">
+  <a href={directionsUrl}><Icon name="navigation-arrow" />Directions</a>
+  <a href="#live"><Icon name="broadcast" />Live</a>
+  <a class="is-primary" href="#give"><Icon name="hand-heart" />Donate</a>
+</nav>

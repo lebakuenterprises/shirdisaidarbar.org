@@ -1,0 +1,57 @@
+---
+// Plan your visit: the stage through the Darbar doorway with a kolam on the step, a street map (drawn from
+// OpenStreetMap by tools/osm-map.mjs) fading into the band with the Darbar marked and a few landmarks named, the
+// guidelines, and the week's temple hours as seven arches with today lit (live.ts).
+// src/data/schedule.json is the one place to edit hours; the day line and the JSON-LD read it too.
+import Icon from './Icon.astro';
+import SectionHead from './SectionHead.astro';
+import DoorwayFrame from './DoorwayFrame.astro';
+import Flame from './Flame.astro';
+import KolamThreshold from './KolamThreshold.astro';
+import visit from '../data/visit.json';
+import schedule from '../data/schedule.json';
+import { windowsFor, type Schedule } from '../lib/schedule';
+import { shortSpan } from '../lib/dayline';
+import type { IconName } from './icons';
+import { directionsUrl, fullAddress, site } from '../lib/site';
+const s = schedule as Schedule;
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const week = DAYS.map((name, day) => ({ name, short: name.slice(0, 3), day, spans: windowsFor(s, day).map(([o, c]) => shortSpan(o, c)) }));
+---
+<section class="sd-band sd-band--sunken" id="visit" aria-labelledby="visit-h"><div class="sd-band__in">
+  <SectionHead id="visit-h" title="Plan your visit" />
+  <div class="sd-visit">
+    <div class="sd-stack">
+      <figure class="sd-doorway">
+        <DoorwayFrame><img class="sd-photo" src="/img/darbar-stage.webp" srcset="/img/darbar-stage-800.webp 800w, /img/darbar-stage.webp 1600w" sizes="(min-width: 900px) 560px, 100vw" width="1600" height="900" loading="lazy" decoding="async" alt="The stage at Shirdi Sai Darbar: Baba's murti at the centre between the Shraddha and Saburi panels, with the Dwarkamai and Chavadi murtis on either side" /></DoorwayFrame>
+        <KolamThreshold />
+      </figure>
+      <address class="sd-address"><strong>{site.name}</strong><span>{fullAddress}</span></address>
+      <p class="sd-small sd-visit-map__credit">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a></p>
+      <div class="sd-row"><a class="sd-btn sd-btn--primary" href={directionsUrl}><Icon name="navigation-arrow" />Get directions</a></div>
+    </div>
+    <div class="sd-stack">
+      <ul class="sd-guides">
+        {visit.guides.map((g) => (
+          <li><span class="sd-guides__icon"><Icon name={g.icon as IconName} /></span><span><strong>{g.title}</strong><span class="sd-small">{g.text}</span></span></li>
+        ))}
+      </ul>
+      <div class="sd-visit-map" role="img" aria-label={`Street map around ${fullAddress}, with nearby ${visit.mapLabels.map((l) => l.name).join(', ')}`}>
+        <div class="sd-visit-map__draw" aria-hidden="true">
+          {visit.mapLabels.map((l) => <span class:list={['sd-visit-map__label', { 'sd-visit-map__label--wide': 'wideOnly' in l && l.wideOnly }]} style={`--x:${l.x}%;--px:${'phoneX' in l ? l.phoneX : l.x}%;top:${l.y}%`}>{l.name}</span>)}
+          <span class="sd-visit-map__mark"><span class="sd-visit-map__disc"><Flame /></span><span class="sd-visit-map__name">{site.name}</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 class="sd-h3 sd-week__title">Temple hours</h3>
+  <ol class="sd-week" data-sd-week>
+    {week.map((d) => (
+      <li class="sd-week__day" data-day={d.day}>
+        <span class="sd-week__name"><abbr title={d.name}>{d.short}</abbr><span class="sd-tag">Today</span></span>
+        <span class="sd-week__spans">{d.spans.map((sp) => <span>{sp}</span>)}</span>
+      </li>
+    ))}
+  </ol>
+  {s.note && <p class="sd-aarti__note sd-week__note"><Icon name="info" /><span>{s.note}</span></p>}
+</div></section>

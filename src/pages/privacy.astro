@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Footer from '../components/Footer.astro';
+import { fullAddress, site } from '../lib/site';
+---
+<Base title="Privacy · Shirdi Sai Darbar" description="How the Shirdi Sai Darbar website handles your information: no cookies, no tracking.">
+  <SiteHeader />
+  <main id="main" class="sd-page">
+    <h1>Privacy</h1>
+    <p class="sd-lead">This website is a simple page about the temple. It does not ask for your name, does not use cookies and does not track you.</p>
+    <h2>What this site does not do</h2>
+    <p>We do not run advertising, visitor counters or tracking scripts, and we do not store anything about you on our side.</p>
+    <h2>Services we link to</h2>
+    <p>When you choose to give, watch or join, you leave this site for that service, and its own privacy policy applies: PayPal and Paybee for donations, Twitch for live darshan, WhatsApp and Facebook for community updates, Google Maps for directions and Google Forms for signups. Events and the construction total are read from a Google Sheet the temple publishes; your browser fetches it from Google. Fonts come from Google Fonts.</p>
+    <h2>Donations</h2>
+    <p>Online gifts are processed by PayPal or Paybee, which send your receipt. The temple receives your name, email and gift amount from them for its records and tax receipts, and does not sell or share them.</p>
+    <h2>Questions</h2>
+    <p>Email <a href={`mailto:${site.email}`}>{site.email}</a> or text {site.phone.display}.</p>
+    <p class="sd-small">{site.name} is a 501(c)(3) nonprofit, EIN {site.ein}, at {fullAddress}.</p>
+  </main>
+  <Footer />
+</Base>

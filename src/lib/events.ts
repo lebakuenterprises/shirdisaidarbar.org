@@ -23,8 +23,10 @@ export const MAX_EVENTS = 6;
 
 const slug = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+/** An http(s) link, or a path on this site (for flyers kept in public/). */
 function httpUrl(raw: string | undefined): string | undefined {
   if (!raw) return undefined;
+  if (/^\/(?!\/)/.test(raw)) return raw;
   try {
     const u = new URL(raw);
     return u.protocol === 'https:' || u.protocol === 'http:' ? u.href : undefined;

@@ -1,0 +1,41 @@
+---
+// Ways to give: pick a Seva or Donation, then hand off to PayPal (amount and monthly are chosen there).
+// Without JavaScript the button is a plain link to the general PayPal page. Other rails open one at a time.
+// A sandal band between the ivory Live darshan and Events bands.
+import Icon from './Icon.astro';
+import SectionHead from './SectionHead.astro';
+import ThaliDrawing from './ThaliDrawing.astro';
+import sevas from '../data/sevas.json';
+import giving from '../data/giving.json';
+import type { IconName } from './icons';
+import { linkAttrs, site } from '../lib/site';
+const general = site.links.paypal;
+const bold = (s: string) => s.split('**').map((part, i) => ({ part, strong: i % 2 === 1 }));
+const ways = giving.ways.map((w) => ({ ...w, href: w.link ? site.links[w.link as keyof typeof site.links] : undefined }));
+---
+<section class="sd-band sd-band--sunken" id="give" aria-labelledby="give-h"><div class="sd-band__in sd-split sd-split--wide">
+  <div class="sd-stack">
+    <ThaliDrawing />
+    <SectionHead id="give-h" title="Ways to give" lead="Your offering keeps the lamps lit, the kitchen cooking and Baba's new temple rising." mark={false} />
+    <div class="sd-ways">
+      <h3 class="sd-h3">Other ways to give</h3>
+      {ways.map((w) => (
+        <details class="sd-way" name="ways">
+          <summary><span class="sd-arch-tile"><Icon name={w.icon as IconName} /></span><span class="sd-way__name">{w.name}</span><span class="sd-way__sum">{w.summary}</span><span class="sd-way__caret" aria-hidden="true"></span></summary>
+          <p>{bold(w.text).map(({ part, strong }) => (strong ? <strong>{part}</strong> : part))}{w.href && <> <a href={w.href}>{w.label}</a></>}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+  <form class="sd-give" data-sd-seva>
+    <fieldset class="sd-seva">
+      <legend>Choose a seva or donation</legend>
+      {sevas.options.map((s, i) => (
+        <label class="sd-seva__opt"><input type="radio" name="seva" value={s.id} data-paypal={s.paypal || general} checked={i === 0} /><span class="sd-seva__name">{s.name}</span><span class="sd-seva__desc">{s.desc}</span></label>
+      ))}
+    </fieldset>
+    <a class="sd-btn sd-btn--primary sd-btn--block" data-sd-give {...linkAttrs(general)} rel="noopener"><Icon name="hand-heart" /><span data-f="give-label">Donate with PayPal</span></a>
+    <p class="sd-small">You choose the amount on PayPal, and can make it monthly there. Any amount is a welcome offering.</p>
+    <p class="sd-trust"><Icon name="seal-check" /><span>Shirdi Sai Darbar is a 501(c)(3) nonprofit, EIN {site.ein}. PayPal emails your tax receipt.</span></p>
+  </form>
+</div></section>

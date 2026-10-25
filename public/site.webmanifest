@@ -1,0 +1,12 @@
+{
+  "name": "Shirdi Sai Darbar",
+  "short_name": "Sai Darbar",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FBF7EF",
+  "theme_color": "#8C2416",
+  "icons": [
+    { "src": "/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

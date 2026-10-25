@@ -1,0 +1,6 @@
+---
+// FlameMark: the Dwarkamai dhuni, Baba's ever-burning fire on two crossed logs inside the Dwarkamai arch.
+interface Props { small?: boolean }
+const { small = false } = Astro.props;
+---
+<span class:list={['sd-flame', { 'sd-flame--sm': small }]} aria-hidden="true"><svg viewBox="0 0 24 24"><path class="sd-flame__arch" d="M4.8 21.6V10.4a7.2 7.2 0 0 1 14.4 0v11.2M3 21.6h18"></path><path class="sd-flame__logs" d="M7.9 20.2L16.1 17.6M7.9 17.6L16.1 20.2"></path><path class="sd-flame__fire" d="M12 6.2C14.4 8.8 15.6 10.9 15.6 12.9A3.6 3.6 0 0 1 8.4 12.9C8.4 10.9 9.6 8.8 12 6.2Z"></path><path class="sd-flame__core" d="M12 10.2C13.1 11.4 13.6 12.4 13.6 13.3A1.6 1.6 0 0 1 10.4 13.3C10.4 12.4 10.9 11.4 12 10.2Z"></path></svg></span>

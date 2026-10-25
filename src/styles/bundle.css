@@ -291,15 +291,15 @@ p { margin: 0; }
 /* Toran: the marigold and mango-leaf garland hung over a mandir doorway. Decorative; at most twice a page (hero top, footer top). */
 .sd-toran { display: block; height: var(--toran-h); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='30' viewBox='0 0 56 30'%3E%3Cpath d='M0 2 Q28 14 56 2' fill='none' stroke='%23C9A24A' stroke-width='1.5'/%3E%3Cpath d='M28 8 q-5 9 0 20 q5 -11 0 -20z' fill='%233F6B35'/%3E%3Ccircle cx='10' cy='10' r='5.5' fill='%23E87915'/%3E%3Ccircle cx='10' cy='10' r='2.6' fill='%23F2A93B'/%3E%3Ccircle cx='46' cy='10' r='5.5' fill='%23E87915'/%3E%3Ccircle cx='46' cy='10' r='2.6' fill='%23F2A93B'/%3E%3C/svg%3E") repeat-x 0 0 / 56px 30px; pointer-events: none; }
 
-/* Dhuni flame: Baba's ever-burning fire. Section mark, next aarti, live state. */
+/* Dwarkamai dhuni: Baba's ever-burning fire inside the Dwarkamai arch. Section mark, next aarti, live state. */
 .sd-flame { display: inline-flex; width: 24px; height: 24px; flex: none; }
 .sd-flame svg { width: 100%; height: 100%; overflow: visible; }
 .sd-flame__fire { fill: var(--saffron-ui); }
 .sd-flame__core { fill: var(--marigold); }
-.sd-flame__bowl { fill: var(--heading); }
-.sd-flame__spout { stroke: var(--heading); stroke-width: 1.6; stroke-linecap: round; fill: none; }
+.sd-flame__arch { stroke: var(--heading); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.sd-flame__logs { stroke: var(--heading); stroke-width: 1.7; stroke-linecap: round; fill: none; }
 .sd-flame--sm { width: 18px; height: 18px; }
-.sd-flame.is-lit .sd-flame__fire, .sd-flame.is-lit .sd-flame__core { transform-origin: 12px 13px; }
+.sd-flame.is-lit .sd-flame__fire, .sd-flame.is-lit .sd-flame__core { transform-origin: 12px 15.5px; }
 @media (prefers-reduced-motion: no-preference) {
   .sd-flame.is-lit .sd-flame__fire { animation: sd-flicker var(--dur-flicker) ease-in-out infinite; }
   .sd-flame.is-lit .sd-flame__core { animation: sd-flicker var(--dur-flicker) ease-in-out infinite reverse; }
@@ -324,8 +324,7 @@ p { margin: 0; }
 .sd-band--sanctum .sd-h2, .sd-band--sanctum .sd-h3 { color: var(--on-sanctum); }
 .sd-band--sanctum .sd-lead, .sd-band--sanctum .sd-small, .sd-band--sanctum .sd-vachan figcaption { color: var(--on-sanctum-muted); }
 .sd-band--sanctum .sd-section-head__mark { color: var(--gold-light); }
-.sd-band--sanctum .sd-flame__bowl { fill: var(--gold-light); }
-.sd-band--sanctum .sd-flame__spout { stroke: var(--gold-light); }
+.sd-band--sanctum .sd-flame__arch, .sd-band--sanctum .sd-flame__logs { stroke: var(--gold-light); }
 .sd-band--sanctum .sd-flame__fire { fill: var(--action-sanctum); }
 .sd-band--sanctum .sd-mantra { color: var(--gold-light); }
 .sd-band--sanctum .sd-vachan blockquote { color: var(--gold-light); }
@@ -341,22 +340,36 @@ p { margin: 0; }
 .sd-sanctum__crown-in { stroke: color-mix(in srgb, var(--gold) 45%, transparent); }
 .sd-sanctum__crown circle { fill: var(--gold-light); }
 
-/* Sannidhi hero: Baba's murti full-bleed, dark in both themes; text never over the murti */
-.sd-sannidhi { --focus: #EE8A2E; position: relative; isolation: isolate; display: flex; flex-direction: column; overflow: hidden; background: var(--sanctum); color: var(--on-sanctum); }
+/* Sannidhi hero: Baba's murti full-bleed; text never over the murti.
+   Day: ivory sanctum (Kakad), Baba lifted onto light with a marigold glow and a gold halo, both baked into the light images.
+   Night: the dark sanctum (Shej). Colours come from the --hero-* variables so the layout is shared. */
+.sd-sannidhi { --hero-bg: var(--surface); --hero-ink: var(--heading); --hero-muted: var(--ink-muted); --hero-kicker: var(--link); --hero-veil: 251, 247, 239; --hero-lift: 0px;
+  position: relative; isolation: isolate; display: flex; flex-direction: column; overflow: hidden; background: var(--hero-bg); color: var(--ink); }
+[data-theme="night"] .sd-sannidhi { --hero-bg: var(--sanctum); --hero-ink: var(--on-sanctum); --hero-muted: var(--on-sanctum-muted); --hero-kicker: var(--gold-light); --hero-veil: 20, 12, 8; --hero-lift: -36px; --focus: #EE8A2E; color: var(--on-sanctum); }
 .sd-sannidhi > .sd-toran { position: absolute; top: 0; left: 0; right: 0; z-index: 2; }
 .sd-sannidhi__img { display: block; width: 100%; height: min(48svh, 440px); object-fit: cover; object-position: 50% 12%; }
 .sd-sannidhi::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: calc(min(48svh, 440px) + 2px); z-index: 0; pointer-events: none;
-  background: linear-gradient(0deg, var(--sanctum) 0%, rgba(20, 12, 8, 0) 36%), linear-gradient(180deg, rgba(20, 12, 8, 0.5) 0%, rgba(20, 12, 8, 0) 18%); }
-.sd-sannidhi::after { content: ""; position: absolute; z-index: 0; left: 50%; top: 0; width: 72vw; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%; mix-blend-mode: screen; pointer-events: none;
+  background: linear-gradient(0deg, var(--hero-bg) 0%, rgba(var(--hero-veil), 0) 36%), linear-gradient(180deg, rgba(var(--hero-veil), 0.5) 0%, rgba(var(--hero-veil), 0) 18%); }
+.sd-sannidhi::after { content: ""; display: none; position: absolute; z-index: 0; left: 50%; top: 0; width: 72vw; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%; mix-blend-mode: screen; pointer-events: none;
   background: radial-gradient(closest-side, rgba(242, 169, 59, 0.28), rgba(232, 121, 21, 0.08) 55%, transparent); }
-.sd-sannidhi__in { position: relative; z-index: 1; width: min(100%, 1240px); margin: -36px auto 0; padding: 0 var(--space-5) calc(var(--today-overlap) + var(--space-6)); }
+[data-theme="night"] .sd-sannidhi::after { display: block; }
+.sd-sannidhi__in { position: relative; z-index: 1; width: min(100%, 1240px); margin: var(--hero-lift) auto 0; padding: 0 var(--space-5) calc(var(--today-overlap) + var(--space-6)); }
 .sd-sannidhi__copy { display: grid; gap: 14px; justify-items: center; text-align: center; max-width: 560px; margin: 0 auto; }
-.sd-sannidhi__mantra { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 19px; line-height: 1.5; letter-spacing: 0.02em; color: var(--gold-light); }
+.sd-sannidhi__mantra { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 19px; line-height: 1.5; letter-spacing: 0.02em; color: var(--hero-kicker); }
 .sd-sannidhi__mantra::before, .sd-sannidhi__mantra::after { content: ""; width: 28px; height: 1px; background: currentColor; opacity: 0.8; }
-.sd-sannidhi h1 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem); line-height: 1.05; letter-spacing: -0.01em; color: var(--on-sanctum); text-wrap: balance; }
-.sd-sannidhi__lead { font-size: 18px; line-height: 1.6; color: var(--on-sanctum-muted); max-width: 32ch; text-wrap: pretty; }
+.sd-sannidhi h1 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem); line-height: 1.05; letter-spacing: -0.01em; color: var(--hero-ink); text-wrap: balance; }
+.sd-sannidhi__lead { font-size: 18px; line-height: 1.6; color: var(--hero-muted); max-width: 32ch; text-wrap: pretty; }
 .sd-sannidhi__ctas { display: none; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-2); }
 .sd-sannidhi__ctas [data-sd-cta="watch"].sd-btn--glow { order: -1; }
+/* Day: the lamp-lit button becomes the maroon primary and the ghost a maroon outline; night keeps the sanctum pair. */
+.sd-sannidhi .sd-btn--glow { background: var(--action); color: var(--on-action); box-shadow: 0 6px 18px rgba(140, 36, 22, 0.22); }
+.sd-sannidhi .sd-btn--glow:hover { background: var(--action); box-shadow: 0 0 0 8px var(--halo); }
+.sd-sannidhi .sd-btn--ghost { color: var(--heading); border-color: var(--line-strong); }
+.sd-sannidhi .sd-btn--ghost:hover { border-color: var(--heading); background: var(--glow-soft); }
+[data-theme="night"] .sd-sannidhi .sd-btn--glow { background: var(--action-sanctum); color: #1A110C; box-shadow: var(--shadow-glow); }
+[data-theme="night"] .sd-sannidhi .sd-btn--glow:hover { background: #F29B47; box-shadow: 0 0 0 8px rgba(238, 138, 46, 0.26); }
+[data-theme="night"] .sd-sannidhi .sd-btn--ghost { color: var(--on-sanctum); border-color: rgba(255, 246, 234, 0.55); }
+[data-theme="night"] .sd-sannidhi .sd-btn--ghost:hover { border-color: var(--on-sanctum); background: rgba(255, 246, 234, 0.08); }
 @media (min-width: 768px) {
   .sd-sannidhi__img { height: min(58svh, 520px); }
   .sd-sannidhi::before { height: calc(min(58svh, 520px) + 2px); }
@@ -367,10 +380,11 @@ p { margin: 0; }
   .sd-sannidhi { min-height: max(var(--hero-min), min(calc(100svh - var(--header-h)), 860px)); justify-content: center; }
   .sd-sannidhi__img { position: absolute; inset: 0; z-index: -2; height: 100%; object-position: 100% 30%; }
   .sd-sannidhi::before { height: auto; inset: 0; z-index: -1;
-    background: linear-gradient(90deg, rgba(20, 12, 8, 0.6) 0%, rgba(20, 12, 8, 0.35) 34%, rgba(20, 12, 8, 0) 46%), linear-gradient(0deg, rgba(20, 12, 8, 0.7) 0%, rgba(20, 12, 8, 0) 28%), linear-gradient(180deg, rgba(20, 12, 8, 0.55) 0%, rgba(20, 12, 8, 0) 18%); }
+    background: linear-gradient(90deg, rgba(var(--hero-veil), 0.6) 0%, rgba(var(--hero-veil), 0.35) 34%, rgba(var(--hero-veil), 0) 46%), linear-gradient(0deg, rgba(var(--hero-veil), 0.7) 0%, rgba(var(--hero-veil), 0) 28%), linear-gradient(180deg, rgba(var(--hero-veil), 0.55) 0%, rgba(var(--hero-veil), 0) 18%); }
   .sd-sannidhi::after { left: 72%; top: -2%; width: 30vw; z-index: -1; }
   .sd-sannidhi__in { margin-top: 0; padding: var(--space-9) var(--space-7) calc(var(--today-overlap) + var(--space-8)); }
-  .sd-sannidhi__copy { justify-items: start; text-align: left; margin: 0; gap: 20px; }
+  .sd-sannidhi__copy { justify-items: start; text-align: left; margin: 0; gap: 20px; max-width: min(540px, 38vw); }
+  .sd-sannidhi h1 { font-size: clamp(3.25rem, 1.1rem + 3.3vw, 4.25rem); }
   .sd-sannidhi__mantra { font-size: 22px; }
   .sd-sannidhi__mantra::before { display: none; }
   .sd-sannidhi__lead { font-size: 21px; max-width: 30ch; }
@@ -413,9 +427,9 @@ a.sd-today__cell:hover { background: var(--glow-soft); }
 .sd-hl__stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .sd-hl__slide.is-cover .sd-hl__stage img { object-fit: cover; }
 .sd-hl__slide.is-noimage .sd-hl__stage { aspect-ratio: 16 / 9; background: radial-gradient(closest-side, rgba(242, 169, 59, 0.24), transparent 70%), var(--sanctum); }
-.sd-hl__slide.is-noimage .sd-hl__stage::after { content: ""; width: 64px; height: 64px; background: var(--marigold); opacity: 0.9;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.8c2.7 3.1 4.3 5.5 4.3 7.8A4.3 4.3 0 0 1 12 13.9a4.3 4.3 0 0 1-4.3-4.3c0-2.3 1.6-4.7 4.3-7.8zM3.5 15.2h17c-.7 3.7-4.1 6.2-8.5 6.2s-7.8-2.5-8.5-6.2z'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1.8c2.7 3.1 4.3 5.5 4.3 7.8A4.3 4.3 0 0 1 12 13.9a4.3 4.3 0 0 1-4.3-4.3c0-2.3 1.6-4.7 4.3-7.8zM3.5 15.2h17c-.7 3.7-4.1 6.2-8.5 6.2s-7.8-2.5-8.5-6.2z'/%3E%3C/svg%3E") center / contain no-repeat; }
+.sd-hl__slide.is-noimage .sd-hl__stage::after { content: ""; width: 72px; height: 72px; background: var(--marigold); opacity: 0.9;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4.8 21.6V10.4a7.2 7.2 0 0 1 14.4 0v11.2M3 21.6h18' stroke='%23000' stroke-width='1.5' stroke-linecap='round' fill='none'/%3E%3Cpath d='M7.9 20.2L16.1 17.6M7.9 17.6L16.1 20.2' stroke='%23000' stroke-width='1.7' stroke-linecap='round' fill='none'/%3E%3Cpath d='M12 6.2C14.4 8.8 15.6 10.9 15.6 12.9A3.6 3.6 0 0 1 8.4 12.9C8.4 10.9 9.6 8.8 12 6.2Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4.8 21.6V10.4a7.2 7.2 0 0 1 14.4 0v11.2M3 21.6h18' stroke='%23000' stroke-width='1.5' stroke-linecap='round' fill='none'/%3E%3Cpath d='M7.9 20.2L16.1 17.6M7.9 17.6L16.1 20.2' stroke='%23000' stroke-width='1.7' stroke-linecap='round' fill='none'/%3E%3Cpath d='M12 6.2C14.4 8.8 15.6 10.9 15.6 12.9A3.6 3.6 0 0 1 8.4 12.9C8.4 10.9 9.6 8.8 12 6.2Z'/%3E%3C/svg%3E") center / contain no-repeat; }
 .sd-hl__text { display: grid; gap: var(--space-3); justify-items: start; align-content: center; }
 .sd-hl__title { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem); line-height: 1.15; color: var(--heading); text-wrap: balance; }
 .sd-hl__line { font-size: 18px; line-height: 1.6; color: var(--ink-muted); max-width: 42ch; text-wrap: pretty; }

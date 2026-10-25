@@ -14,6 +14,7 @@ One-page, mobile-first website for Shirdi Sai Darbar (Sunnyvale), a static Astro
 - `npm run build`: fails while `TODO:` links remain; `ALLOW_PLACEHOLDERS=1 npm run build` for a demo build
 - `npx playwright test`: smoke tests against `npm run preview`
 - `node tools/tokens-to-css.mjs`: regenerate `src/styles/tokens.css` after replacing `design-system/tokens.json`
+- `node tools/osm-map.mjs`: redraw `public/img/visit-map.svg` from OpenStreetMap (only if the temple moves)
 - Set `ASTRO_TELEMETRY_DISABLED=1` in CI. New dependencies: exact versions at least 2 weeks old.
 
 ## Hard rules

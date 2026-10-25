@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="This page has moved · Shirdi Sai Darbar" description="The Shirdi Sai Darbar website is now one simple page.">
+  <SiteHeader />
+  <main id="main" class="sd-page">
+    <h1>This page has moved</h1>
+    <p class="sd-lead">The Darbar's website is now one simple page. Everything you need is there: aarti times, events, live darshan and ways to give.</p>
+    <div class="sd-row">
+      <a class="sd-btn sd-btn--primary" href="/">Go to the homepage</a>
+      <a class="sd-btn sd-btn--quiet" href="/#give"><Icon name="hand-heart" />Donate</a>
+    </div>
+  </main>
+</Base>

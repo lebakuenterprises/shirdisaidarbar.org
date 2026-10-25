@@ -11,20 +11,25 @@
     "settingsCsv": ""
   },
   "construction": { "goal": 3000000, "vision": 10000000 },
+  "templeTour": { "id": "2mB2Gdijo10", "start": 2, "title": "Tour of the upcoming Shirdi Sai Darbar temple" },
   "links": {
     "paypal": "https://www.paypal.com/donate?token=aTQJnhEg6msZ_GGo6JN1CpbS1kAFwoyrWq3eNLFMYlnJhl8kv1kl9jpl057TVE49ieie25Yb03iZ2ruF",
-    "whatsappCommunity": "TODO:WhatsApp Community invite",
-    "volunteerForm": "TODO:Volunteer signup form",
+    "whatsapp": "https://whatsapp.com/channel/0029Va7564F35fLtJLTrvb19",
+    "whatsappNote": "The WhatsApp channel; replace with the Community invite once Venkat finds it.",
     "priestService": "sms:+14084820089",
     "paybee": "https://paybee.io/quickpay.html?handle=ssd_paybee#campaignList",
-    "walkthrough": "https://youtu.be/IHSg9r0oJ9U",
     "donorLevels": "https://new-temple-construction.shirdisaidarbar.org/",
     "shop": "https://shop.shirdisaidarbar.org/",
     "photos": "TODO:Google Photos album",
     "calendarPdf": "/pdf/Calendar_2026.pdf",
     "sisterTemple": "https://bayareahindutemple.org/",
-    "facebook": "https://www.facebook.com/shirdisaidarbarSunnyvale",
-    "youtube": "https://www.youtube.com/user/shirdisaidarbar",
     "twitch": "https://www.twitch.tv/shirdisaidarbarsunnyvale"
-  }
+  },
+  "social": [
+    { "name": "WhatsApp", "icon": "whatsapp-logo", "url": "https://whatsapp.com/channel/0029Va7564F35fLtJLTrvb19" },
+    { "name": "YouTube", "icon": "youtube-logo", "url": "https://www.youtube.com/@shirdisaidarbar" },
+    { "name": "Facebook", "icon": "facebook-logo", "url": "https://www.facebook.com/shirdisaidarbarSunnyvale/" },
+    { "name": "Instagram", "icon": "instagram-logo", "url": "https://www.instagram.com/shirdisaidarbarsunnyvale/" },
+    { "name": "Twitch", "icon": "twitch-logo", "url": "https://www.twitch.tv/shirdisaidarbarsunnyvale" }
+  ]
 }

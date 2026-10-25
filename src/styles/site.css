@@ -1,0 +1,319 @@
+/* The page's own layer over the design system: the day line, the header's menu and theme switch, the Darbar
+   doorway, the palette bands, the week of arches, the featured event, the giving disclosures, and browser surfaces.
+   Tokens only. See DESIGN.md. */
+
+[hidden] { display: none !important; }
+html { scrollbar-color: var(--line-strong) var(--surface-sunken); accent-color: var(--action); }
+input, textarea { caret-color: var(--action); }
+abbr[title] { text-decoration: none; }
+
+.sd-skip { position: absolute; left: var(--space-4); top: -100px; z-index: var(--z-menu); padding: var(--space-3) var(--space-4); border-radius: var(--radius-pill); background: var(--action); color: var(--on-action); font-weight: 600; }
+.sd-skip:focus { top: var(--space-3); }
+
+/* ---------------------------------------------------------------- Header: sections in page order, Menu, theme */
+.sd-nav a[aria-current] { color: var(--heading); background: var(--glow-soft); }
+.sd-menu { position: relative; margin-left: auto; }
+.sd-menu summary { list-style: none; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; border-radius: var(--radius-pill); color: var(--ink); font-weight: 600; cursor: pointer; }
+.sd-menu summary::-webkit-details-marker { display: none; }
+.sd-menu summary:hover, .sd-menu[open] summary { background: var(--surface-sunken); }
+.sd-menu__panel { position: absolute; right: 0; top: calc(100% + 6px); z-index: var(--z-menu); display: grid; min-width: 210px; padding: var(--space-2); background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-md); }
+.sd-menu__panel a { display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: var(--radius-sm); color: var(--ink); text-decoration: none; font-weight: 500; }
+.sd-menu__panel a:hover { background: var(--glow-soft); }
+.sd-menu__panel a[aria-current] { color: var(--heading); font-weight: 600; background: var(--glow-soft); }
+.sd-theme { display: grid; place-items: center; width: 44px; height: 44px; flex: none; border: 0; border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; }
+.sd-theme:hover { background: var(--surface-sunken); }
+.sd-theme > span { display: grid; }
+.sd-theme__night, [data-theme="night"] .sd-theme__day { display: none !important; }
+[data-theme="night"] .sd-theme__night { display: grid !important; }
+@media (max-width: 420px) { .sd-menu summary span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }
+@media (max-width: 767px) {
+  .sd-header .sd-btn--primary { display: none; }
+  .sd-dayline__track { height: 100px; }
+  /* A dropdown would fall over Baba's murti; on phones the menu rises from the action bar instead. */
+  .sd-menu__panel { position: fixed; left: var(--space-4); right: var(--space-4); top: auto; bottom: calc(var(--actionbar-h) + env(safe-area-inset-bottom) + var(--space-3)); grid-template-columns: 1fr 1fr; gap: 2px var(--space-2); }
+}
+@media (min-width: 900px) and (max-width: 1099px) { .sd-nav--wide { display: none; } }
+@media (min-width: 1100px) { .sd-menu { display: none; } .sd-nav--wide { display: flex; } }
+
+/* ---------------------------------------------------------------- Bands: two grounds, alternating
+   Kafni ivory and chandan with gold, strictly alternating from the hero to the footer, so every section stands clear of
+   its neighbours by value. The hero is the DS sanctum (ivory by day, dark by night), so the sandal bands are Temple,
+   Give and Visit. The kolam marks the hero, Events and the footer. Night keeps a lighter mix: a stronger one would pull
+   its warm dark toward pastel. */
+:root {
+  --band-ivory: var(--surface);
+  --band-sandal: color-mix(in oklab, var(--surface-sunken), var(--gold) 30%);
+  /* On sandal, secondary text and links step toward ink so they keep 4.5:1 in both themes. */
+  --muted-on-tint: color-mix(in oklab, var(--ink) 78%, var(--surface));
+  --link-on-tint: color-mix(in oklab, var(--link) 72%, var(--ink));
+}
+[data-theme="night"] { --band-sandal: color-mix(in oklab, var(--surface-sunken), var(--gold) 16%); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="day"]) { --band-sandal: color-mix(in oklab, var(--surface-sunken), var(--gold) 16%); }
+}
+.sd-band--sunken { --ink-muted: var(--muted-on-tint); --link: var(--link-on-tint); background: var(--band-sandal); }
+.sd-footer { position: relative; isolation: isolate; background: var(--band-ivory); }
+/* On sandal, disclosures and arch tiles keep a clear edge. */
+.sd-band--sunken .sd-way, .sd-band--sunken .sd-way:last-child { border-color: var(--line-strong); }
+.sd-band--sunken .sd-arch-tile { background: var(--surface-raised); }
+
+/* ---------------------------------------------------------------- Hero: the DS Sannidhi, photo chosen by theme
+   The DS hero styles live in bundle.css. Here: the photo as a background (a <picture> follows the device, not the
+   Day/Night switch), with the same media queries as the preload in index.astro so only one file loads; the kolam on
+   the open ground, fading out before Baba; and a shorter phone photo so the whole day line clears the action bar. */
+.sd-sannidhi { --hero-img-h: min(29svh, 300px); }
+.sd-sannidhi__img { height: var(--hero-img-h); background: url(/img/murti-face-wide-light.webp) 50% 12% / cover no-repeat; }
+.sd-sannidhi::before { height: calc(var(--hero-img-h) + 2px); }
+[data-theme="night"] .sd-sannidhi__img { background-image: url(/img/murti-face-wide.webp); }
+.sd-sannidhi__kolam { position: absolute; isolation: isolate; left: 0; right: 0; top: var(--hero-img-h); bottom: 0; z-index: 0; pointer-events: none; }
+@media (min-width: 768px) { .sd-sannidhi { --hero-img-h: min(40svh, 440px); } }
+@media (min-width: 1100px) {
+  /* The photo ends above the day line, fading into the ground, so the strip never sits over Baba. It is capped at
+     1600px and centred, so on wide screens Baba stays near the words instead of drifting to the window's edge. */
+  .sd-sannidhi__img { bottom: var(--today-overlap); width: min(100%, 1600px); height: auto; margin: 0 auto; background-position: 100% 30%; background-image: url(/img/murti-hero-wide-light-1280.webp);
+    -webkit-mask-image: linear-gradient(to top, transparent, #000 16%); mask-image: linear-gradient(to top, transparent, #000 16%); }
+  [data-theme="night"] .sd-sannidhi__img { background-image: url(/img/murti-hero-wide-1280.webp); }
+  .sd-sannidhi::before { height: auto; }
+  .sd-sannidhi__kolam { top: 0; right: 50%; z-index: -1; -webkit-mask-image: linear-gradient(to right, #000 55%, transparent); mask-image: linear-gradient(to right, #000 55%, transparent); }
+}
+@media (min-width: 1400px), (min-width: 1100px) and (min-resolution: 1.5dppx) {
+  .sd-sannidhi__img { background-image: url(/img/murti-hero-wide-light-1920.webp); }
+  [data-theme="night"] .sd-sannidhi__img { background-image: url(/img/murti-hero-wide-1920.webp); }
+}
+/* Past 1600px the photo's sides meet the ground: blend them with a veil in the hero's own colour, as the DS veils do
+   (a second mask layer would leave a hairline at the edge). */
+@media (min-width: 1601px) {
+  .sd-sannidhi__img::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to left, var(--hero-bg), transparent 4%), linear-gradient(to right, var(--hero-bg), transparent 4%); }
+}
+
+/* ---------------------------------------------------------------- Live darshan on ivory: light frame, 16:9 player */
+.sd-band--live .sd-sanctum__frame { background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--gold), var(--shadow-soft); }
+.sd-band--live .sd-sanctum__crown circle { fill: var(--gold); }
+.sd-band--live a:not(.sd-btn) { color: var(--link); }
+/* The Twitch and YouTube players replace their posters at the poster's shape; an iframe has no height of its own. */
+iframe.sd-live { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; padding: 0; }
+/* Poster label strip: light in Day, as the rest of the page; the DS's dark strip stays in Night. */
+[data-theme="day"] .sd-live { background: var(--surface-raised); color: var(--ink); }
+[data-theme="day"] .sd-live__label, [data-theme="day"] .sd-live__title { color: var(--ink); }
+[data-theme="day"] .sd-live__sub { color: var(--ink-muted); }
+/* Open on Twitch: Twitch's own purple, white label (4.65:1), opening the channel in a new tab. */
+.sd-btn--twitch { background: #9146FF; color: #fff; border-color: #9146FF; }
+.sd-btn--twitch:hover { background: #772CE8; border-color: #772CE8; transform: translateY(-1px); }
+
+/* ---------------------------------------------------------------- The day line */
+.sd-dayline { position: relative; z-index: 3; display: grid; gap: var(--space-2); width: min(calc(100% - 32px), 1144px); margin: calc(var(--today-overlap) * -1 + 8px) auto 0; padding: var(--space-4) var(--space-4) var(--space-3); background: var(--surface-raised); border-radius: var(--radius-md); box-shadow: var(--shadow-md); }
+.sd-dayline::before { content: ""; position: absolute; top: 0; left: var(--space-5); right: var(--space-5); height: 3px; border-radius: 0 0 3px 3px; background: var(--saffron); }
+.sd-dayline__say { text-align: center; font-size: 17px; line-height: 1.45; font-weight: 600; color: var(--ink); text-wrap: balance; }
+.sd-dayline__say .sd-today__dot { display: inline-block; margin-right: 8px; vertical-align: 2px; }
+.sd-dayline .sd-today__dot { background: var(--open); }
+.sd-dayline.is-closed .sd-today__dot { background: var(--ink-muted); }
+.sd-dayline.is-live .sd-today__dot { background: var(--live); }
+
+.sd-dayline__track { position: relative; height: 112px; margin: 0 var(--space-2); }
+.sd-dayline__thread, .sd-dayline__elapsed { position: absolute; left: 0; top: 50%; height: 2px; margin-top: -1px; border-radius: 2px; }
+.sd-dayline__thread { right: 0; background: var(--gold); opacity: 0.5; }
+.sd-dayline__elapsed { width: var(--now); background: var(--saffron-ui); transform-origin: left center; }
+.sd-dayline__bands { position: absolute; inset: 0; }
+.sd-dayline__band { position: absolute; top: 50%; left: var(--a); width: calc(var(--b) - var(--a)); height: 12px; margin-top: -6px; border-radius: var(--radius-pill); background: var(--halo); }
+.sd-dayline__stop { position: absolute; left: var(--at); top: 50%; display: grid; place-items: center; width: 30px; height: 30px; transform: translate(-50%, -50%); }
+.sd-dayline__stop::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--surface-raised); box-shadow: 0 0 0 1px var(--line); }
+.sd-dayline__stop .sd-flame { position: relative; }
+.sd-dayline__stop:not(.is-next) .sd-flame__fire, .sd-dayline__stop:not(.is-next) .sd-flame__core { fill: var(--line-strong); }
+.sd-dayline__stop.is-past { opacity: 0.6; }
+.sd-dayline__stop.is-next::before { background: var(--glow-soft); box-shadow: 0 0 0 1px var(--saffron-ui), var(--shadow-glow); }
+.sd-dayline__label { position: absolute; display: grid; white-space: nowrap; font-size: 14px; line-height: 1.3; color: var(--ink-muted); font-variant-numeric: tabular-nums lining-nums; }
+.sd-dayline__label span:first-child { font-weight: 600; color: var(--ink); }
+.sd-dayline__stop.is-next .sd-dayline__label span:first-child { color: var(--heading); }
+.sd-dayline__stop[data-side="above"] .sd-dayline__label { bottom: calc(100% + 6px); }
+.sd-dayline__stop[data-side="below"] .sd-dayline__label { top: calc(100% + 6px); }
+.sd-dayline__stop[data-edge="start"] .sd-dayline__label { left: 0; text-align: left; }
+.sd-dayline__stop[data-edge="mid"] .sd-dayline__label { left: 50%; transform: translateX(-50%); text-align: center; }
+.sd-dayline__stop[data-edge="end"] .sd-dayline__label { right: 0; text-align: right; }
+.sd-dayline__lamp { position: absolute; top: 50%; left: var(--now); width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--marigold); box-shadow: 0 0 0 4px var(--halo), 0 0 20px 6px var(--halo); }
+@keyframes sd-thread { from { transform: scaleX(0); } }
+@keyframes sd-lamp-in { from { opacity: 0; transform: scale(0.4); } }
+@media (prefers-reduced-motion: no-preference) {
+  .is-live-ready .sd-dayline__elapsed { animation: sd-thread 1.6s var(--ease-out) both; }
+  .is-live-ready .sd-dayline__lamp { animation: sd-lamp-in 0.6s var(--ease-out) 1.2s both; }
+}
+@media (min-width: 900px) {
+  .sd-dayline { width: min(calc(100% - 96px), 1144px); margin-top: calc(var(--today-overlap) * -1); padding: var(--space-4) var(--space-6) var(--space-5); }
+  .sd-dayline__track { margin: 0 var(--space-4); }
+  .sd-dayline__label { font-size: 15px; }
+}
+
+/* ---------------------------------------------------------------- Layout */
+.sd-stack { display: grid; gap: var(--space-4); align-content: start; }
+.sd-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: var(--space-5) var(--space-8); align-items: start; }
+.sd-split--wide { gap: var(--space-7); }
+.sd-split--center { align-items: center; }
+.sd-split > *, .sd-grid-2 > * { min-width: 0; }
+.sd-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: var(--space-4); align-items: start; }
+.sd-row--center { justify-content: center; }
+.sd-card--list { padding: var(--space-3); }
+
+/* ---------------------------------------------------------------- Build Baba's temple */
+.sd-appeal { overflow: hidden; }
+.sd-appeal::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 0; width: min(760px, 140vw); aspect-ratio: 2 / 1; transform: translateX(-50%); background: radial-gradient(closest-side, var(--glow-soft), transparent); pointer-events: none; }
+.sd-appeal__in { display: grid; justify-items: center; gap: var(--space-5); text-align: center; }
+.sd-appeal__head { margin-bottom: 0; }
+.sd-appeal__meter { width: min(100%, 560px); display: grid; gap: var(--space-3); text-align: left; }
+.sd-drawing__line { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.sd-drawing__flame { fill: var(--saffron); }
+.sd-drawing__core { fill: var(--marigold); }
+
+/* ---------------------------------------------------------------- Temple hours (in Plan your visit): the week as seven arches */
+.sd-week__title { margin: var(--space-8) 0 var(--space-4); }
+.sd-week { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.sd-week__day { display: grid; grid-template-columns: 56px 1fr; align-items: center; gap: var(--space-4); }
+.sd-week__name { position: relative; display: grid; place-items: center; height: 72px; border-radius: var(--radius-pill) var(--radius-pill) var(--radius-sm) var(--radius-sm); background: var(--surface-raised); font-family: var(--font-display); font-size: 20px; color: var(--heading); }
+.sd-week__name .sd-tag { display: none; }
+.sd-week__spans { display: flex; flex-wrap: wrap; gap: 2px var(--space-4); font-variant-numeric: tabular-nums lining-nums; }
+.sd-week__day.is-today .sd-week__name { background: var(--glow-soft); box-shadow: 0 0 0 1.5px var(--saffron-ui), var(--shadow-glow); }
+.sd-week__day.is-today .sd-week__spans { color: var(--heading); font-weight: 600; }
+.sd-week__note { margin-top: var(--space-4); padding: 0; }
+@media (min-width: 900px) {
+  .sd-week { grid-template-columns: repeat(7, 1fr); gap: var(--space-3); align-items: stretch; }
+  .sd-week__day { grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 0; align-items: start; padding: var(--space-7) var(--space-3) var(--space-4); border-radius: 50% 50% var(--radius-md) var(--radius-md) / 80px 80px var(--radius-md) var(--radius-md); background: var(--surface-raised); text-align: center; }
+  .sd-week__name { height: auto; background: none; margin-bottom: var(--space-3); }
+  .sd-week__day.is-today .sd-week__name { background: none; box-shadow: none; }
+  .sd-week__day.is-today { background: var(--glow-soft); box-shadow: 0 0 0 1.5px var(--saffron-ui), var(--shadow-glow); }
+  .sd-week__name .sd-tag { position: absolute; top: calc(var(--space-6) * -1); left: 50%; transform: translateX(-50%); }
+  .sd-week__day.is-today .sd-week__name .sd-tag { display: inline-flex; }
+  .sd-week__spans { display: grid; gap: 4px; justify-items: center; font-size: 16px; }
+}
+
+/* ---------------------------------------------------------------- Events */
+.sd-loading { display: flex; gap: var(--space-2); align-items: center; color: var(--ink-muted); }
+.sd-loading .sd-ic { color: var(--gold); }
+.sd-events__foot { margin-top: var(--space-5); }
+.sd-tag--start { justify-self: start; }
+.sd-event__link { color: inherit; text-decoration: none; }
+.sd-event__link:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------------- Ways to give */
+.sd-ways .sd-h3 { margin: var(--space-3) 0 var(--space-3); }
+.sd-way { border-top: 1px solid var(--line); }
+.sd-way:last-child { border-bottom: 1px solid var(--line); }
+.sd-way summary { list-style: none; display: grid; grid-template-columns: 40px 1fr 16px; column-gap: var(--space-3); align-items: center; min-height: 68px; padding: var(--space-2) 0; cursor: pointer; }
+.sd-way summary::-webkit-details-marker { display: none; }
+.sd-way .sd-arch-tile { grid-row: 1 / span 2; }
+.sd-way__name { font-weight: 600; }
+.sd-way__sum { grid-column: 2; font-size: 16px; color: var(--ink-muted); overflow-wrap: anywhere; }
+.sd-way__caret { grid-column: 3; grid-row: 1 / span 2; width: 9px; height: 9px; border-right: 2px solid var(--link); border-bottom: 2px solid var(--link); transform: rotate(45deg); transition: transform var(--dur-quick) var(--ease-out); }
+.sd-way[open] .sd-way__caret { transform: rotate(-135deg); }
+.sd-way summary:hover .sd-way__name { color: var(--heading); }
+.sd-way p { padding: 0 0 var(--space-4) calc(40px + var(--space-3)); color: var(--ink-muted); overflow-wrap: anywhere; }
+.sd-way p strong { color: var(--ink); }
+.sd-give { display: grid; gap: var(--space-4); max-width: 560px; }
+
+/* Fieldsets default to min-content width and would overflow a phone. */
+.sd-seva { min-inline-size: 0; }
+
+/* ---------------------------------------------------------------- Plan your visit: the street map through a doorway */
+.sd-photo { width: 100%; height: auto; border-radius: var(--radius-md); }
+
+/* ---------------------------------------------------------------- Plain pages (privacy, 404) */
+.sd-page { max-width: var(--measure); margin: 0 auto; padding: var(--space-8) var(--space-4); display: grid; gap: var(--space-4); }
+.sd-page h1 { font-family: var(--font-display); font-weight: 400; color: var(--heading); font-size: 40px; line-height: 44px; margin: 0; }
+.sd-page h2 { font-family: var(--font-display); font-weight: 400; color: var(--heading); font-size: 26px; margin: var(--space-4) 0 0; }
+
+/* ---------------------------------------------------------------- Lower-half richness: drawings, frames, band motifs */
+/* Ways to give: the aarti thali heads the section. */
+.sd-thali { width: min(240px, 64vw); height: auto; margin-bottom: calc(var(--space-2) * -1); }
+
+/* Events: the admin's featured event full width, its flyer shown whole (arch if tall, doorway if wide). Lamp light marks only the
+   next event (the soonest), wherever it sits; the featured card rests unless it is next. */
+.sd-events__list { display: grid; gap: var(--space-4); }
+.sd-event.is-next { background: var(--glow-soft); box-shadow: 0 0 0 1.5px var(--saffron-ui), var(--shadow-glow); }
+.sd-event.is-next .sd-event__date { background: var(--surface-raised); }
+.sd-event.is-next .sd-tag { background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--gold); }
+.sd-event--feature { max-width: none; border: 0 !important; box-shadow: 0 0 0 1px var(--gold), var(--shadow-soft); }
+.sd-event--feature.is-next { box-shadow: 0 0 0 1.5px var(--saffron-ui), var(--shadow-glow); }
+.sd-event--feature .sd-event__date { padding: 22px 0 14px; background: var(--surface-sunken); box-shadow: inset 0 0 0 1px var(--gold); }
+.sd-event--feature .sd-event__day { font-size: 44px; line-height: 1; }
+.sd-event--feature .sd-h3 { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.15; color: var(--heading); }
+.sd-event--feature .sd-event__flyer { grid-column: 1 / -1; }
+.sd-event__flyer { --frame-ground: var(--surface-raised); margin: 0; padding: var(--space-2); border-radius: var(--radius-md); background: radial-gradient(closest-side, var(--glow-soft), var(--surface-sunken)); box-shadow: inset 0 0 0 1px var(--gold); }
+.sd-event.is-next .sd-event__flyer { --frame-ground: var(--glow-soft); }
+/* The arch follows the flyer, not the column: a portrait dome around the picture's own width. */
+.sd-event__flyer.is-arch { justify-self: center; width: fit-content; border-radius: var(--radius-pill) var(--radius-pill) var(--radius-md) var(--radius-md); overflow: hidden; }
+.sd-event__flyer.is-arch img { width: auto; max-width: 100%; }
+.sd-event__flyer:not(.sd-doorframe) .sd-doorframe__crown { display: none; }
+.sd-event__flyer img { width: 100%; height: 260px; object-fit: contain; }
+@media (min-width: 900px) {
+  .sd-event--feature { grid-template-columns: 104px 1fr minmax(220px, 280px); grid-template-areas: "date body flyer" "actions actions flyer"; grid-template-rows: auto auto; align-content: center; column-gap: var(--space-5); }
+  .sd-event--feature:not(:has(.sd-event__flyer)) { grid-template-columns: 104px 1fr; grid-template-areas: "date body" "actions actions"; }
+  .sd-event--feature .sd-event__date { grid-area: date; }
+  .sd-event--feature .sd-event__body { grid-area: body; }
+  .sd-event--feature .sd-event__actions { grid-area: actions; align-self: end; }
+  .sd-event--feature .sd-event__flyer { grid-area: flyer; align-self: center; }
+  .sd-event--feature .sd-event__flyer img { height: 200px; }
+  .sd-event--feature .sd-h3 { font-size: 34px; }
+}
+/* Three left after the featured card: three across, no orphan cell. */
+@media (min-width: 1100px) {
+  .sd-grid-2:has(> :nth-child(3):last-child) { grid-template-columns: repeat(3, 1fr); }
+  .sd-grid-2:has(> :nth-child(3):last-child) .sd-event__meta { flex-direction: column; align-items: flex-start; }
+}
+
+
+/* The Darbar doorway: wide media in a double gold line, crowned by a small Dwarkamai arch (as Live darshan). */
+.sd-doorframe { --frame-ground: var(--surface); position: relative; margin-top: 30px; padding: 6px; border-radius: var(--radius-md); box-shadow: inset 0 0 0 1px var(--gold), 0 0 0 6px var(--frame-ground), 0 0 0 7px var(--gold); }
+.sd-doorframe__crown { position: absolute; left: 50%; bottom: calc(100% + 6px); width: 120px; height: 30px; transform: translateX(-50%); overflow: visible; }
+.sd-doorframe__crown path { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; }
+.sd-doorframe__crown circle { fill: var(--gold); }
+.sd-doorframe > img { display: block; width: 100%; border-radius: calc(var(--radius-md) - 4px); }
+.sd-event__flyer.sd-doorframe { margin-top: 36px; padding: var(--space-2); }
+.sd-event__flyer.sd-doorframe img { border-radius: calc(var(--radius-md) - 4px); }
+
+/* Build Baba's temple: the tour video, wide, in the doorway. */
+.sd-appeal__video { width: min(100%, 760px); margin-top: var(--space-2); }
+.sd-doorframe > .sd-live { max-width: none; border-radius: 12px; }
+iframe.sd-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; padding: 0; }
+
+/* Events: WhatsApp beside the heading, where its news lives. */
+.sd-events__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-4) var(--space-6); margin-bottom: var(--space-6); }
+.sd-events__head .sd-section-head { margin-bottom: 0; }
+
+/* Footer: Follow the Darbar. */
+.sd-social { display: grid; gap: var(--space-1); }
+.sd-social a { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; }
+.sd-social .sd-ic { color: var(--heading); }
+
+/* Plan your visit: the street map, unframed, fading into the band under the guidelines. The drawing is a 16:9 box
+   (one SVG as a mask, so the streets take the theme's gold) with the Darbar at its centre; the landmark labels are
+   placed in % of that box from src/data/visit.json. */
+.sd-band--sunken .sd-doorframe { --frame-ground: var(--band-sandal); }
+.sd-visit-map { position: relative; aspect-ratio: 16 / 9;
+  -webkit-mask-image: radial-gradient(ellipse closest-side, #000 72%, transparent); mask-image: radial-gradient(ellipse closest-side, #000 72%, transparent); }
+.sd-visit-map__draw { position: absolute; inset: 0; }
+.sd-visit-map__draw::before { content: ""; position: absolute; inset: 0; background: var(--gold); opacity: 0.55;
+  -webkit-mask: url(/img/visit-map.svg) center / 100% 100% no-repeat; mask: url(/img/visit-map.svg) center / 100% 100% no-repeat; }
+.sd-visit-map__label { position: absolute; left: var(--x); transform: translate(-50%, -50%); padding: 0 6px; border-radius: var(--radius-sm); background: var(--band-sandal);
+  font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; color: var(--ink-muted); }
+@media (max-width: 599px) {
+  .sd-visit-map__label { left: var(--px); font-size: 11px; }
+  .sd-visit-map__label--wide { display: none; }
+  /* Phones: the name sits over the disc, so it stays inside the map and clear of the expressway label. */
+  .sd-visit-map__mark { flex-direction: column-reverse; gap: 4px; transform: translate(-50%, calc(-100% + 18px)); }
+  .sd-visit-map__disc { width: 36px; height: 36px; }
+  .sd-visit-map__name { font-size: 16px; }
+}
+/* The Darbar: the DS dhuni mark in a saffron disc ringed in gold, its name beside it. */
+.sd-visit-map__mark { position: absolute; left: 50%; top: 50%; display: flex; align-items: center; gap: 8px; transform: translate(-22px, -50%); }
+.sd-visit-map__disc { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--surface-raised);
+  box-shadow: 0 0 0 2px var(--saffron-ui), 0 0 0 5px var(--surface-raised), 0 0 0 6px var(--gold), var(--shadow-soft); }
+.sd-visit-map__disc .sd-flame { width: 26px; height: 26px; }
+.sd-visit-map__name { padding: 2px 8px; border-radius: var(--radius-sm); background: var(--surface-raised); font-family: var(--font-display); font-size: 18px; color: var(--heading); white-space: nowrap; }
+.sd-visit-map__credit { margin: calc(var(--space-2) * -1) 0 0; }
+
+/* Plan your visit: a kolam drawn on the doorstep. */
+.sd-doorway { margin: 0; display: grid; gap: 0; }
+.sd-threshold { display: block; width: calc(100% - 48px); margin: 4px auto 0; opacity: 0.75; }
+.sd-threshold__dot { fill: var(--gold); }
+
+/* ---------------------------------------------------------------- Dev only: links still waiting for a real address */
+.is-dev [data-todo] { outline: 2px dashed var(--danger); outline-offset: 2px; position: relative; }
+.is-dev [data-todo]::after { content: "TODO: " attr(data-todo); position: absolute; left: 0; top: 100%; margin-top: 4px; padding: 2px 6px; border-radius: 4px; background: var(--danger); color: #fff; font: 600 12px/1.4 var(--font-sans); white-space: nowrap; z-index: 5; pointer-events: none; }

@@ -5,3 +5,9 @@ test-results/
 playwright-report/
 .env
 .env.*
+.playwright-mcp/
+.impeccable/review/
+.impeccable/config.local.json
+
+# Raw downloads from the old site (source material, not shipped)
+images/

@@ -1,0 +1,11 @@
+---
+import Flame from './Flame.astro';
+// mark: false when a drawing heads the section instead of the hanging diya.
+interface Props { id: string; title: string; lead?: string; center?: boolean; mark?: boolean }
+const { id, title, lead, center = false, mark = true } = Astro.props;
+---
+<header class:list={['sd-section-head', { 'sd-section-head--center': center }]}>
+  {mark && <span class="sd-section-head__mark"><Flame /></span>}
+  <h2 class="sd-h2" id={id}>{title}</h2>
+  {lead && <p class="sd-lead">{lead}</p>}
+</header>

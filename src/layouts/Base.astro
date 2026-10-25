@@ -1,13 +1,32 @@
 ---
 import '../styles/tokens.css';
 import '../styles/bundle.css';
-import site from '../data/site.json';
+import '../styles/site.css';
+import schedule from '../data/schedule.json';
+import { site } from '../lib/site';
 
-interface Props { title: string; description: string }
-const { title, description } = Astro.props;
+interface Props { title: string; description: string; jsonLd?: boolean }
+const { title, description, jsonLd = false } = Astro.props;
+const DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': ['HinduTemple', 'NGO'],
+  name: site.name,
+  description: 'A volunteer-run Shirdi Sai Baba mandir in Sunnyvale, California.',
+  url: `${site.url}/`,
+  image: `${site.url}/img/og-image.jpg`,
+  logo: `${site.url}/img/icon-512.png`,
+  telephone: site.phone.e164,
+  email: site.email,
+  taxID: site.ein,
+  nonprofitStatus: 'Nonprofit501c3',
+  address: { '@type': 'PostalAddress', streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.region, postalCode: site.address.postal, addressCountry: 'US' },
+  openingHoursSpecification: schedule.hours.flatMap((h) => h.windows.map(([opens, closes]) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days.map((d) => DOW[d]), opens, closes }))),
+  sameAs: site.social.map((s) => s.url),
+};
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" class:list={{ 'is-dev': import.meta.env.DEV }}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -16,9 +35,30 @@ const { title, description } = Astro.props;
     <meta name="theme-color" content="#FBF7EF" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#140E0B" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={new URL(Astro.url.pathname, site.url)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, site.url)} />
+    <meta property="og:image" content={`${site.url}/img/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script is:inline>
+      // Day (Kakad) or Night (Shej): the visitor's choice, else the device setting. Set before paint, no flash.
+      (function () {
+        var t; try { t = localStorage.getItem('sd-theme'); } catch (e) {}
+        if (t !== 'day' && t !== 'night') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'day';
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
     <slot name="head" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
   </head>
   <body>
     <slot />

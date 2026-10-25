@@ -1,0 +1,33 @@
+---
+// The day line: where the day is at the Darbar, read like the temple reads it, by its four aartis.
+// A gold thread from dawn to close, open hours as warm bands, a diya at each aarti, and a lamp at now.
+// The sentence under the thread carries every fact in words; the drawing is aria-hidden. live.ts keeps it current.
+import Flame from './Flame.astro';
+import schedule from '../data/schedule.json';
+import { pct } from '../lib/dayline';
+import { formatTime } from '../lib/time';
+const short = (name: string) => name.replace(' Aarti', '');
+---
+<section class="sd-dayline" data-sd-today aria-label="Today at the Darbar">
+  <div class="sd-dayline__track" aria-hidden="true">
+    <span class="sd-dayline__thread"></span>
+    {schedule.hours.map((h) => (
+      <span class="sd-dayline__bands" data-days={h.days.join(' ')}>
+        {h.windows.map(([o, c]) => <span class="sd-dayline__band" style={`--a:${pct(o)}%;--b:${pct(c)}%`}></span>)}
+      </span>
+    ))}
+    <span class="sd-dayline__elapsed" style="--now:0%"></span>
+    {schedule.aartis.map((a, i) => {
+      const at = pct(a.time);
+      const edge = at < 15 ? 'start' : at > 85 ? 'end' : 'mid';
+      return (
+        <span class="sd-dayline__stop" data-t={a.time} data-edge={edge} data-side={i % 2 ? 'below' : 'above'} style={`--at:${at}%`}>
+          <Flame small />
+          <span class="sd-dayline__label"><span>{short(a.name)}</span><span>{formatTime(a.time)}</span></span>
+        </span>
+      );
+    })}
+    <span class="sd-dayline__lamp" style="--now:0%" hidden></span>
+  </div>
+  <p class="sd-dayline__say"><span class="sd-today__dot" aria-hidden="true"></span><span data-f="say">Open daily, with four aartis from 6:45 AM.</span></p>
+</section>

@@ -1,0 +1,26 @@
+---
+// Hero: the DS Sannidhi. Baba full-bleed, ivory sanctum by day (Kakad) and the dark sanctum by night (Shej); the words
+// beside him, never over him. The photo is a CSS background chosen by theme (site.css), so only one file loads and the
+// Day/Night switch can change it; Base.astro preloads the same file. The kolam sits on the open ground only.
+// The day line follows, rising over the hero's foot.
+import Icon from './Icon.astro';
+import DayLine from './DayLine.astro';
+import { directionsUrl } from '../lib/site';
+---
+<section class="sd-sannidhi" aria-labelledby="hero-h">
+  <div class="sd-toran" aria-hidden="true"></div>
+  <div class="sd-sannidhi__img" role="img" aria-label="The marble murti of Shri Sai Baba at Shirdi Sai Darbar in a saffron turban and shawl, garlanded with jasmine and pearls"></div>
+  <div class="sd-kolam sd-sannidhi__kolam" aria-hidden="true"></div>
+  <div class="sd-sannidhi__in">
+    <div class="sd-sannidhi__copy">
+      <p class="sd-sannidhi__mantra" lang="hi">श्रद्धा · सबुरी</p>
+      <h1 id="hero-h">Baba's home in the Bay Area</h1>
+      <p class="sd-sannidhi__lead">A volunteer-run Shirdi Sai Baba mandir in Sunnyvale. All are welcome.</p>
+      <div class="sd-sannidhi__ctas">
+        <a class="sd-btn sd-btn--glow" data-sd-cta="directions" href={directionsUrl}><Icon name="navigation-arrow" />Get directions</a>
+        <a class="sd-btn sd-btn--ghost" data-sd-cta="watch" href="#live"><Icon name="broadcast" />Watch live</a>
+      </div>
+    </div>
+  </div>
+</section>
+<DayLine />

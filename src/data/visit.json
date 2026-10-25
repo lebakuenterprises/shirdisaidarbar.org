@@ -1,0 +1,45 @@
+{
+  "note": "Wording to be confirmed by the temple.",
+  "guides": [
+    {
+      "icon": "sneaker",
+      "title": "Footwear",
+      "text": "Please leave shoes on the rack before entering the hall."
+    },
+    {
+      "icon": "t-shirt",
+      "title": "Dress",
+      "text": "Modest clothing that covers shoulders and knees."
+    },
+    {
+      "icon": "bowl-food",
+      "title": "Prasad",
+      "text": "Offered after each aarti."
+    },
+    {
+      "icon": "camera-slash",
+      "title": "Photography",
+      "text": "Ask a volunteer before photographing the murti."
+    }
+  ],
+  "mapLabels": [
+    {
+      "name": "Central Expressway",
+      "x": 43.1,
+      "y": 64.9,
+      "phoneX": 33
+    },
+    {
+      "name": "East Arques Avenue",
+      "x": 24.8,
+      "y": 32.0
+    },
+    {
+      "name": "North Fair Oaks Avenue",
+      "x": 23.9,
+      "y": 44.2,
+      "wideOnly": true
+    }
+  ],
+  "mapLabelsNote": "Landmarks on the Visit map, as % of public/img/visit-map.svg (the Darbar is at 50, 50). Candidates come from node tools/osm-map.mjs. phoneX moves a label along its road on phones; wideOnly labels are hidden on phones, where they would meet the Darbar marker."
+}

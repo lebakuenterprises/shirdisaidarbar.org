@@ -1,0 +1,37 @@
+---
+// Build Baba's temple: the appeal around the temple tour video. The YouTube player loads only on tap
+// (src/scripts/main.ts); until then the poster is our own copy of its thumbnail. The meter stays hidden until the
+// Settings tab gives a "raised" figure.
+import Icon from './Icon.astro';
+import DoorwayFrame from './DoorwayFrame.astro';
+import SectionHead from './SectionHead.astro';
+import { site } from '../lib/site';
+interface Props { settingsSrc: string }
+const { settingsSrc } = Astro.props;
+const { goal } = site.construction;
+const tour = site.templeTour;
+---
+<section class="sd-band sd-band--sunken sd-appeal" id="temple" aria-labelledby="build-h"><div class="sd-band__in sd-appeal__in">
+  <SectionHead id="build-h" title="Build Baba's temple" lead="Our home on San Geronimo Way is becoming a marble temple for Baba, with an Annadanam kitchen and hall, built for the next hundred years." center />
+  <div class="sd-appeal__video">
+    <DoorwayFrame>
+      <button class="sd-live sd-video" type="button" data-sd-video={tour.id} data-start={tour.start} data-title={tour.title} aria-label="Play the tour of the new temple, on YouTube">
+        <img src="/img/temple-tour.webp" width="940" height="529" alt="" loading="lazy" decoding="async" />
+        <span class="sd-live__play"><Icon name="play" /></span>
+        <span class="sd-live__label"><span class="sd-live__title">Tour the new temple</span><span class="sd-live__sub">A walk through the planned marble temple</span></span>
+      </button>
+    </DoorwayFrame>
+  </div>
+  <div class="sd-appeal__meter">
+    <div class="sd-meter" data-sd-meter data-src={settingsSrc} data-goal={goal} hidden>
+      <p class="sd-meter__figure"><span class="sd-meter__raised" data-f="raised"></span><span class="sd-meter__of">raised of the $3M immediate goal</span></p>
+      <div class="sd-meter__track" role="meter" aria-label="Construction fundraising" aria-valuemin="0" aria-valuemax={goal} aria-valuenow="0"><span class="sd-meter__tick" style="left:33.33%" aria-hidden="true"></span><span class="sd-meter__tick" style="left:66.67%" aria-hidden="true"></span><div class="sd-meter__fill" style="--pct:0%"></div></div>
+      <p class="sd-meter__foot"><span data-f="pct"></span><span>Full vision: $10M new temple</span></p>
+    </div>
+    <p class="sd-small sd-appeal__note">Every gift is tax-deductible.</p>
+  </div>
+  <div class="sd-row sd-row--center">
+    <a class="sd-btn sd-btn--primary" href="#give" data-seva-pick="temple"><Icon name="hand-heart" />Donate</a>
+    <a class="sd-btn sd-btn--quiet" href={site.links.donorLevels}>See donor recognition<span class="sd-btn__go"><Icon name="arrow-right" /></span></a>
+  </div>
+</div></section>

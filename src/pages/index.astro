@@ -1,14 +1,51 @@
 ---
-// M1 foundation page: proves the design-system styles, data and Schedule logic render. The 11 sections arrive in M2.
+// The home page, in the order Venkat set: what to see and do first, the day's details lower down.
 import Base from '../layouts/Base.astro';
-import schedule from '../data/schedule.json';
-import { formatTime } from '../lib/time';
+import SiteHeader from '../components/SiteHeader.astro';
+import Hero from '../components/Hero.astro';
+import BuildTemple from '../components/BuildTemple.astro';
+import Events from '../components/Events.astro';
+import Give from '../components/Give.astro';
+import LiveDarshan from '../components/LiveDarshan.astro';
+import Visit from '../components/Visit.astro';
+import Footer from '../components/Footer.astro';
+import MobileActionBar from '../components/MobileActionBar.astro';
+import { site } from '../lib/site';
+
+// Until the Sheet's CSV links are set, dev and demo builds read the sample files in public/demo/.
+const demo = import.meta.env.DEV || process.env.ALLOW_PLACEHOLDERS === '1';
+const src = (url: string, file: string) => url || (demo ? `/demo/${file}` : '');
 ---
-<Base title="Shirdi Sai Darbar · Shirdi Sai Baba temple in Sunnyvale" description="A volunteer-run Shirdi Sai Baba mandir in Sunnyvale, California.">
-  <main class="sd-stage">
-    <h1 class="display">Baba's home in the Bay Area</h1>
-    <ol>
-      {schedule.aartis.map((a) => <li>{a.name}, {formatTime(a.time)}</li>)}
-    </ol>
+<Base title="Shirdi Sai Darbar · Shirdi Sai Baba temple in Sunnyvale" description="A volunteer-run Shirdi Sai Baba mandir in Sunnyvale, California. Daily aarti times, temple hours, upcoming events, live darshan and ways to give." jsonLd>
+  <Fragment slot="head">
+    <script is:inline>
+      // Preload the hero photo for the chosen theme. The media queries match site.css exactly, so it is the one file used.
+      (function () {
+        var light = document.documentElement.dataset.theme === 'night' ? '' : '-light';
+        [['(max-width: 1099px)', '/img/murti-face-wide' + light + '.webp'],
+         ['(min-width: 1100px) and (max-width: 1399px) and (max-resolution: 1.49dppx)', '/img/murti-hero-wide' + light + '-1280.webp'],
+         ['(min-width: 1400px), (min-width: 1100px) and (min-resolution: 1.5dppx)', '/img/murti-hero-wide' + light + '-1920.webp']]
+          .forEach(function (p) {
+            var l = document.createElement('link');
+            l.rel = 'preload'; l.as = 'image'; l.media = p[0]; l.href = p[1]; l.setAttribute('fetchpriority', 'high');
+            document.head.appendChild(l);
+          });
+      })();
+    </script>
+  </Fragment>
+  <SiteHeader />
+  <main id="main">
+    <Hero />
+    <BuildTemple settingsSrc={src(site.sheet.settingsCsv, 'settings.csv')} />
+    <LiveDarshan />
+    <Give />
+    <Events src={src(site.sheet.eventsCsv, 'events.csv')} />
+    <Visit />
   </main>
+  <Footer />
+  <MobileActionBar />
 </Base>
+
+<script>
+  import '../scripts/main.ts';
+</script>
