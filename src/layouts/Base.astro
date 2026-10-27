@@ -8,7 +8,14 @@ import { directionsUrl, site } from '../lib/site';
 interface Props { title: string; description: string; jsonLd?: boolean; noindex?: boolean }
 const { title, description, jsonLd = false, noindex = false } = Astro.props;
 // The page's own address: pages are built as files (privacy.html), served without the extension.
-const pageUrl = new URL(Astro.url.pathname.replace(/(index)?\.html$/, ''), site.url);
+const path = Astro.url.pathname.replace(/(index)?\.html$/, '');
+const pageUrl = new URL(path, site.url);
+// Link previews (WhatsApp, Facebook, X) fetch the image from the address being shared, so they use the host the site is
+// served from: PUBLIC_ORIGIN, set as a Cloudflare build variable while the beta lives on workers.dev. The canonical
+// stays on site.url for search.
+const origin = (process.env.PUBLIC_ORIGIN || site.url).replace(/\/$/, '');
+const shareUrl = new URL(path, origin);
+const ogImage = `${origin}/img/og-image.jpg`;
 const DOW = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const ld = {
   '@context': 'https://schema.org',
@@ -44,12 +51,16 @@ const ld = {
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={pageUrl} />
-    <meta property="og:image" content={`${site.url}/img/og-image.jpg`} />
+    <meta property="og:url" content={shareUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Shirdi Sai Darbar, the Shirdi Sai Baba temple in Sunnyvale" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
