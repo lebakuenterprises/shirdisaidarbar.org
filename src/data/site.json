@@ -39,7 +39,7 @@
     "donorLevels": "https://new-temple-construction.shirdisaidarbar.org/",
     "shop": "https://shop.shirdisaidarbar.org/",
     "photos": "https://photos.app.goo.gl/msivKHx89ij6uku66",
-    "calendarPdf": "/pdf/Calendar_2026.pdf",
+    "calendarPdf": "https://shirdisaidarbar.org/pdf/Calendar_2026.pdf",
     "sisterTemple": "https://bayareahindutemple.org/",
     "twitch": "https://www.twitch.tv/shirdisaidarbarsunnyvale"
   },
@@ -69,5 +69,10 @@
       "icon": "twitch-logo",
       "url": "https://www.twitch.tv/shirdisaidarbarsunnyvale"
     }
-  ]
+  ],
+  "feedback": {
+    "note": "Beta feedback: a Google Form. The device answer (\"What did you use - Phone or computer?\") is pre-filled from the screen.",
+    "form": "https://docs.google.com/forms/d/e/1FAIpQLSeCuPX3XdL750ZyHXsXYnLxCBwCYyViqPezPkTbQ4Pvalp3Mw/viewform",
+    "deviceEntry": "entry.879050699"
+  }
 }

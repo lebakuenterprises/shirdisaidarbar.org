@@ -18,6 +18,7 @@ import { fullAddress, linkAttrs, site } from '../lib/site';
       <li><a {...linkAttrs(site.links.priestService)}>Priest services</a></li>
       <li><a {...linkAttrs(site.links.volunteer)}>Volunteer with us</a></li>
       <li><a {...linkAttrs(site.links.photos)}>Photo albums</a></li>
+      <li><a data-sd-feedback {...linkAttrs(site.feedback.form)}>Website feedback</a></li>
       <li><a {...linkAttrs(site.links.sisterTemple)}>Bay Area Hindu Temple</a> <span class="sd-small">(sister temple)</span></li>
     </ul></div>
     <div><h3>Follow the Darbar</h3><ul class="sd-social">
@@ -27,3 +28,5 @@ import { fullAddress, linkAttrs, site } from '../lib/site';
     <p class="sd-footer__legal"><span>501(c)(3) nonprofit, EIN {site.ein}</span><span>&copy; <span data-year>{new Date().getFullYear()}</span> {site.name}</span><a {...linkAttrs('/privacy')}>Privacy</a></p>
   </div>
 </footer>
+<!-- Beta feedback, floating at the viewport's lower right; hidden while the hero (Baba's murti) is on screen. -->
+<a class="sd-feedback-fab" data-sd-feedback data-sd-fab {...linkAttrs(site.feedback.form)}><Icon name="envelope-simple" /><span class="sd-feedback-fab__long">Tell us what you think</span><span class="sd-feedback-fab__short" aria-hidden="true">Feedback</span><span class="sd-sr"> about this preview of the new website (opens in a new tab)</span></a>

@@ -1,0 +1,10 @@
+// Cloudflare Workers, static assets only (no Worker code): docs/adr/0001. Workers Builds runs `npm run build`, then
+// `npx wrangler deploy`, on every push to the production branch.
+{
+  "name": "shirdisaidarbar",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

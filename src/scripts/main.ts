@@ -4,6 +4,7 @@ import { startMenu, startScrollSpy, startTheme } from './header';
 import { startLive } from './live';
 import { startMeter } from './meter';
 import { startVachan } from './vachan';
+import { site } from '../lib/site';
 
 document.querySelectorAll<HTMLButtonElement>('[data-sd-theme]').forEach(startTheme);
 document.querySelectorAll<HTMLDetailsElement>('[data-sd-menu]').forEach(startMenu);
@@ -12,6 +13,22 @@ startLive();
 document.querySelectorAll<HTMLElement>('[data-sd-events]').forEach(startEvents);
 document.querySelectorAll<HTMLElement>('[data-sd-meter]').forEach(startMeter);
 document.querySelectorAll<HTMLElement>('[data-sd-vachan]').forEach(startVachan);
+
+// Beta feedback: pre-fill the form's "Phone or computer?" answer from the screen. Nothing is sent unless the tester submits.
+const device = matchMedia('(pointer: coarse)').matches ? (Math.min(screen.width, screen.height) >= 600 ? 'Tablet' : 'Phone') : 'Computer';
+document.querySelectorAll<HTMLAnchorElement>('[data-sd-feedback]').forEach((a) => {
+  const url = new URL(site.feedback.form);
+  url.searchParams.set('usp', 'pp_url');
+  url.searchParams.set(site.feedback.deviceEntry, device);
+  a.href = url.toString();
+});
+// The floating button stays away while the hero is on screen, so nothing covers Baba's murti.
+const fab = document.querySelector<HTMLElement>('[data-sd-fab]');
+const hero = document.querySelector('.sd-sannidhi');
+if (fab && hero) {
+  fab.classList.add('is-away');
+  new IntersectionObserver(([e]) => fab.classList.toggle('is-away', e!.isIntersecting), { threshold: 0.05 }).observe(hero);
+}
 
 // Live darshan: swap the poster for the Twitch player, only on tap.
 document.querySelectorAll<HTMLButtonElement>('[data-sd-live]').forEach((button) => {

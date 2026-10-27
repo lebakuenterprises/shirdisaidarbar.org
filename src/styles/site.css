@@ -369,3 +369,17 @@ iframe.sd-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 
 .sd-visit-photo__chip { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 14px 6px 10px; border-radius: var(--radius-pill); background: var(--surface-raised); color: var(--heading); font-weight: 600; font-size: 16px; box-shadow: var(--shadow-soft); }
 .sd-visit-photo__chip .sd-ic { width: 20px; height: 20px; color: var(--saffron-ui); }
 .sd-visit-photo:hover .sd-visit-photo__chip { box-shadow: 0 0 0 2px var(--saffron-ui), var(--shadow-soft); }
+
+/* Beta feedback: a floating button at the viewport's lower right, above the phone action bar. It waits until the
+   hero has scrolled away, so nothing sits over Baba's murti. */
+.sd-feedback-fab { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: calc(var(--actionbar-h) + 12px + env(safe-area-inset-bottom)); z-index: var(--z-actionbar);
+  display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px 0 14px; border: 1px solid var(--gold); border-radius: var(--radius-pill);
+  background: var(--surface-raised); color: var(--heading); font: 600 16px/1.2 var(--font-sans); text-decoration: none; box-shadow: var(--shadow-soft);
+  transition: opacity var(--dur-quick) var(--ease-out), transform var(--dur-quick) var(--ease-out), visibility 0s; }
+.sd-feedback-fab .sd-ic { width: 20px; height: 20px; color: var(--saffron-ui); }
+.sd-feedback-fab:hover { border-color: var(--saffron-ui); box-shadow: 0 0 0 2px var(--saffron-ui), var(--shadow-soft); }
+.sd-feedback-fab:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.sd-feedback-fab.is-away { opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity var(--dur-quick) var(--ease-out), transform var(--dur-quick) var(--ease-out), visibility 0s linear var(--dur-quick); }
+.sd-feedback-fab__long { display: none; }
+@media (min-width: 768px) { .sd-feedback-fab { right: 24px; bottom: 24px; } .sd-feedback-fab__long { display: inline; } .sd-feedback-fab__short { display: none; } }
+@media (prefers-reduced-motion: reduce) { .sd-feedback-fab, .sd-feedback-fab.is-away { transform: none; } }

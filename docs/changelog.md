@@ -2,6 +2,10 @@
 
 Format: one entry per milestone, newest first ([Keep a Changelog](https://keepachangelog.com/en/1.1.0/)).
 
+## M3.2 Beta (2026-10-27)
+- A floating "Tell us what you think" button (lower right, above the phone action bar, hidden while the hero shows Baba) and a footer Website feedback link open the beta Google Form with the device answer pre-filled.
+- Cloudflare Workers static-assets config (`wrangler.jsonc`); the 2026 calendar links to the current site, since the 29 MB PDF exceeds the 25 MiB file limit.
+
 ## M3.1 Frames and taps (2026-10-27)
 - The day line now sits on the seam between the hero and the sandal Temple band (no bare strip under it); the hero kolam is whole again.
 - Every link away from the page now opens in a new tab (one rule, `opensNewTab`, tested; recorded in CLAUDE.md).
