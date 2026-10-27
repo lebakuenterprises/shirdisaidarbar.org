@@ -24,6 +24,7 @@ One-page, mobile-first website for Shirdi Sai Darbar (Sunnyvale), a static Astro
 - Pin exact dependency versions (no `^`/`~`). No adapter, no View Transitions (see docs/adr/0001).
 - Content that changes a few times a year lives in `src/data/*.json`; Events and the meter come from the Google Sheet (docs/adr/0002).
 - Copy voice: no em/en dashes, sentence case, no emoji, no exclamation marks in headings.
+- Every link opens in a new tab, except places on this page (`#…`, `/#…`), the home page and `sms:`/`mailto:`/`tel:`. Write links as `{...linkAttrs(url)}` (`src/lib/site.ts`); links made in scripts check `opensNewTab` (`src/lib/links.ts`).
 
 ## Doc-update rule (keep docs lean)
 At the end of each milestone (M0–M4 in project_status.md):

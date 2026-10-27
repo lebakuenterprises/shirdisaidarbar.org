@@ -22,7 +22,7 @@ const ways = giving.ways.map((w) => ({ ...w, href: w.link ? site.links[w.link as
       {ways.map((w) => (
         <details class="sd-way" name="ways">
           <summary><span class="sd-arch-tile"><Icon name={w.icon as IconName} /></span><span class="sd-way__name">{w.name}</span><span class="sd-way__sum">{w.summary}</span><span class="sd-way__caret" aria-hidden="true"></span></summary>
-          <p>{bold(w.text).map(({ part, strong }) => (strong ? <strong>{part}</strong> : part))}{w.href && <> <a href={w.href}>{w.label}</a></>}</p>
+          <p>{bold(w.text).map(({ part, strong }) => (strong ? <strong>{part}</strong> : part))}{w.href && <> <a {...linkAttrs(w.href)}>{w.label}</a></>}</p>
         </details>
       ))}
     </div>
@@ -31,11 +31,11 @@ const ways = giving.ways.map((w) => ({ ...w, href: w.link ? site.links[w.link as
     <fieldset class="sd-seva">
       <legend>Choose a seva or donation</legend>
       {sevas.options.map((s, i) => (
-        <label class="sd-seva__opt"><input type="radio" name="seva" value={s.id} data-paypal={s.paypal || general} checked={i === 0} /><span class="sd-seva__name">{s.name}</span><span class="sd-seva__desc">{s.desc}</span></label>
+        <label class="sd-seva__opt"><input type="radio" name="seva" value={s.id} data-paypal={s.paypal || general} checked={i === 0} /><span class="sd-seva__name">{s.name}</span><span class="sd-seva__desc">{s.desc}</span>{s.amount > 0 && <span class="sd-seva__amt">${s.amount}</span>}</label>
       ))}
     </fieldset>
-    <a class="sd-btn sd-btn--primary sd-btn--block" data-sd-give {...linkAttrs(general)} rel="noopener"><Icon name="hand-heart" /><span data-f="give-label">Donate with PayPal</span></a>
-    <p class="sd-small">You choose the amount on PayPal, and can make it monthly there. Any amount is a welcome offering.</p>
+    <a class="sd-btn sd-btn--primary sd-btn--block" data-sd-give {...linkAttrs(general)}><Icon name="hand-heart" /><span data-f="give-label">Donate with PayPal</span></a>
+    <p class="sd-small">Amounts shown are suggested offerings. You enter the amount on PayPal, and can make it monthly there. Any amount is welcome.</p>
     <p class="sd-trust"><Icon name="seal-check" /><span>Shirdi Sai Darbar is a 501(c)(3) nonprofit, EIN {site.ein}. PayPal emails your tax receipt.</span></p>
   </form>
 </div></section>

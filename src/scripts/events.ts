@@ -3,6 +3,7 @@ import { parseEvents, visibleEvents, type SdEvent } from '../lib/events';
 import { buildIcs } from '../lib/ics';
 import { fullAddress, site } from '../lib/site';
 import { addDays, dateTile, formatDateLong, formatTime, templeNow } from '../lib/time';
+import { opensNewTab } from '../lib/links';
 import { fetchText } from './fetch-text';
 
 type State = 'loading' | 'list' | 'empty' | 'error';
@@ -12,8 +13,9 @@ function show(root: HTMLElement, state: State) {
 }
 
 function setLink(a: HTMLAnchorElement, url: string | undefined) {
-  if (url) a.href = url;
-  else a.remove();
+  if (!url) return a.remove();
+  a.href = url;
+  if (opensNewTab(url)) { a.target = '_blank'; a.rel = 'noopener'; }
 }
 
 function downloadIcs(e: SdEvent) {
@@ -53,8 +55,27 @@ function card(tpl: HTMLTemplateElement, e: SdEvent, today: string): HTMLElement 
   setLink(el.querySelector('[data-a="whatsapp"]')!, e.whatsappGroup);
   setLink(el.querySelector('[data-a="signup"]')!, e.signup);
   if (e.signup && !/paybee\.io/.test(e.signup)) f('signup-label').textContent = 'Sign up';
-  setLink(el.querySelector('[data-a="flyer"]')!, e.flyer);
+  const flyer = el.querySelector<HTMLButtonElement>('[data-a="flyer"]')!;
+  if (e.flyer) flyer.addEventListener('click', () => openFlyer(e, flyer));
+  else flyer.remove();
   return el;
+}
+
+/** The flyer, whole, in a dialog, with the event's Sponsor or Sign up link under it. Esc, Close or the backdrop close it. */
+function openFlyer(e: SdEvent, from: HTMLElement) {
+  const dlg = document.querySelector<HTMLDialogElement>('[data-sd-flyer]');
+  if (!dlg || !e.flyer) return;
+  const img = dlg.querySelector<HTMLImageElement>('.sd-flyer__img')!;
+  img.src = e.flyer;
+  img.alt = `Flyer for ${e.title}`;
+  const cta = dlg.querySelector<HTMLAnchorElement>('[data-f="flyer-cta"]')!;
+  cta.hidden = !e.signup;
+  if (e.signup) {
+    setLink(cta, e.signup);
+    cta.querySelector('span')!.textContent = /paybee\.io/.test(e.signup) ? 'Sponsor or register' : 'Sign up';
+  }
+  dlg.addEventListener('close', () => from.focus(), { once: true });
+  dlg.showModal();
 }
 
 // The doorway's crown, as in src/components/DoorwayFrame.astro (static markup, no data in it).
@@ -66,6 +87,11 @@ function feature(el: HTMLElement, e: SdEvent): HTMLElement {
   if (e.flyer) {
     const fig = document.createElement('figure');
     fig.className = 'sd-event__flyer';
+    const open = document.createElement('button');
+    open.type = 'button';
+    open.className = 'sd-event__flyer-open';
+    open.setAttribute('aria-label', `Open the flyer for ${e.title}`);
+    open.addEventListener('click', () => openFlyer(e, open));
     const img = document.createElement('img');
     img.src = e.flyer;
     img.alt = `Flyer for ${e.title}`;
@@ -76,7 +102,8 @@ function feature(el: HTMLElement, e: SdEvent): HTMLElement {
     const shape = () => fig.classList.add(img.naturalHeight / img.naturalWidth > 1.2 ? 'is-arch' : 'sd-doorframe');
     if (img.complete && img.naturalWidth) shape(); else img.addEventListener('load', shape, { once: true });
     fig.insertAdjacentHTML('afterbegin', CROWN);
-    fig.append(img);
+    open.append(img);
+    fig.append(open);
     // Before the actions, so on phones the flyer stays with its card's words.
     el.querySelector('.sd-event__actions')!.before(fig);
   }
@@ -84,6 +111,10 @@ function feature(el: HTMLElement, e: SdEvent): HTMLElement {
 }
 
 export async function startEvents(root: HTMLElement) {
+  // A tap on the backdrop (the dialog itself, outside its content) closes the flyer.
+  root.querySelector<HTMLDialogElement>('[data-sd-flyer]')?.addEventListener('click', (ev) => {
+    if (ev.target === ev.currentTarget) (ev.currentTarget as HTMLDialogElement).close();
+  });
   const src = root.dataset.src;
   if (!src) return show(root, 'empty');
   try {

@@ -14,15 +14,16 @@ import { fullAddress, linkAttrs, site } from '../lib/site';
       <address class="sd-address">{fullAddress}<br /><a href={`sms:${site.phone.e164}`}>{site.phone.display}</a> ({site.phone.note})<br /><a href={`mailto:${site.email}`}>{site.email}</a></address>
     </div>
     <div><h3>More from the Darbar</h3><ul>
-      <li><a href={site.links.shop}>Gift shop</a></li>
-      <li><a href={site.links.priestService}>Priest services</a></li>
+      <li><a {...linkAttrs(site.links.shop)}>Gift shop</a></li>
+      <li><a {...linkAttrs(site.links.priestService)}>Priest services</a></li>
+      <li><a {...linkAttrs(site.links.volunteer)}>Volunteer with us</a></li>
       <li><a {...linkAttrs(site.links.photos)}>Photo albums</a></li>
-      <li><a href={site.links.sisterTemple}>Bay Area Hindu Temple</a> <span class="sd-small">(sister temple)</span></li>
+      <li><a {...linkAttrs(site.links.sisterTemple)}>Bay Area Hindu Temple</a> <span class="sd-small">(sister temple)</span></li>
     </ul></div>
     <div><h3>Follow the Darbar</h3><ul class="sd-social">
-      {site.social.map((s) => <li><a href={s.url}><Icon name={s.icon as IconName} />{s.name}</a></li>)}
+      {site.social.map((s) => <li><a {...linkAttrs(s.url)}><Icon name={s.icon as IconName} />{s.name}</a></li>)}
     </ul></div>
     <div class="sd-signoff"><Flame /><p class="sd-signoff__hi" lang="hi">सबका मालिक एक</p><p class="sd-signoff__en">Sabka Malik Ek. One God governs all.</p></div>
-    <p class="sd-footer__legal"><span>501(c)(3) nonprofit, EIN {site.ein}</span><span>&copy; <span data-year>{new Date().getFullYear()}</span> {site.name}</span><a href="/privacy">Privacy</a></p>
+    <p class="sd-footer__legal"><span>501(c)(3) nonprofit, EIN {site.ein}</span><span>&copy; <span data-year>{new Date().getFullYear()}</span> {site.name}</span><a {...linkAttrs('/privacy')}>Privacy</a></p>
   </div>
 </footer>

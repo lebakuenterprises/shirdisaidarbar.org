@@ -1,35 +1,73 @@
 {
   "name": "Shirdi Sai Darbar",
   "url": "https://shirdisaidarbar.org",
-  "address": { "street": "255 San Geronimo Way", "city": "Sunnyvale", "region": "CA", "postal": "94085" },
-  "phone": { "display": "408-482-0089", "e164": "+14084820089", "note": "text or WhatsApp only" },
+  "address": {
+    "street": "255 San Geronimo Way",
+    "city": "Sunnyvale",
+    "region": "CA",
+    "postal": "94085"
+  },
+  "phone": {
+    "display": "408-482-0089",
+    "e164": "+14084820089",
+    "note": "text or WhatsApp only"
+  },
   "email": "saiseva@shirdisaidarbar.org",
   "ein": "27-3235464",
   "twitchChannel": "shirdisaidarbarsunnyvale",
   "sheet": {
-    "eventsCsv": "",
-    "settingsCsv": ""
+    "eventsCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSHOiM64Gg_Jy0GCdK7cfVc52Iw_TAZ-7wte20mF0LEtEgug6vlW3UZjP0mtiOe2hLT9q8ejhhtNgtU/pub?gid=1619331816&single=true&output=csv",
+    "settingsCsv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSHOiM64Gg_Jy0GCdK7cfVc52Iw_TAZ-7wte20mF0LEtEgug6vlW3UZjP0mtiOe2hLT9q8ejhhtNgtU/pub?gid=672257364&single=true&output=csv",
+    "eventForm": "https://forms.gle/EjhBVmvWpmgB9M3E7"
   },
-  "construction": { "goal": 3000000, "vision": 10000000 },
-  "templeTour": { "id": "2mB2Gdijo10", "start": 2, "title": "Tour of the upcoming Shirdi Sai Darbar temple" },
+  "construction": {
+    "goal": 10000000,
+    "vision": 20000000
+  },
+  "templeTour": {
+    "id": "2mB2Gdijo10",
+    "start": 2,
+    "title": "Tour of the upcoming Shirdi Sai Darbar temple"
+  },
   "links": {
     "paypal": "https://www.paypal.com/donate?token=aTQJnhEg6msZ_GGo6JN1CpbS1kAFwoyrWq3eNLFMYlnJhl8kv1kl9jpl057TVE49ieie25Yb03iZ2ruF",
     "whatsapp": "https://whatsapp.com/channel/0029Va7564F35fLtJLTrvb19",
     "whatsappNote": "The WhatsApp channel; replace with the Community invite once Venkat finds it.",
     "priestService": "sms:+14084820089",
+    "volunteer": "https://docs.google.com/forms/d/e/1FAIpQLSefAVjB2SRVNp-t3k2A09qvYVukI8KkZ76mzR_yn57sTnyhsg/viewform",
     "paybee": "https://paybee.io/quickpay.html?handle=ssd_paybee#campaignList",
     "donorLevels": "https://new-temple-construction.shirdisaidarbar.org/",
     "shop": "https://shop.shirdisaidarbar.org/",
-    "photos": "TODO:Google Photos album",
+    "photos": "https://photos.app.goo.gl/msivKHx89ij6uku66",
     "calendarPdf": "/pdf/Calendar_2026.pdf",
     "sisterTemple": "https://bayareahindutemple.org/",
     "twitch": "https://www.twitch.tv/shirdisaidarbarsunnyvale"
   },
   "social": [
-    { "name": "WhatsApp", "icon": "whatsapp-logo", "url": "https://whatsapp.com/channel/0029Va7564F35fLtJLTrvb19" },
-    { "name": "YouTube", "icon": "youtube-logo", "url": "https://www.youtube.com/@shirdisaidarbar" },
-    { "name": "Facebook", "icon": "facebook-logo", "url": "https://www.facebook.com/shirdisaidarbarSunnyvale/" },
-    { "name": "Instagram", "icon": "instagram-logo", "url": "https://www.instagram.com/shirdisaidarbarsunnyvale/" },
-    { "name": "Twitch", "icon": "twitch-logo", "url": "https://www.twitch.tv/shirdisaidarbarsunnyvale" }
+    {
+      "name": "WhatsApp",
+      "icon": "whatsapp-logo",
+      "url": "https://whatsapp.com/channel/0029Va7564F35fLtJLTrvb19"
+    },
+    {
+      "name": "YouTube",
+      "icon": "youtube-logo",
+      "url": "https://www.youtube.com/@shirdisaidarbar"
+    },
+    {
+      "name": "Facebook",
+      "icon": "facebook-logo",
+      "url": "https://www.facebook.com/shirdisaidarbarSunnyvale/"
+    },
+    {
+      "name": "Instagram",
+      "icon": "instagram-logo",
+      "url": "https://www.instagram.com/shirdisaidarbarsunnyvale/"
+    },
+    {
+      "name": "Twitch",
+      "icon": "twitch-logo",
+      "url": "https://www.twitch.tv/shirdisaidarbarsunnyvale"
+    }
   ]
 }

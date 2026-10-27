@@ -1,5 +1,5 @@
 ---
-// Plan your visit: the stage through the Darbar doorway with a kolam on the step, a street map (drawn from
+// Plan your visit: the Darbar from the street, in the doorway with a kolam on the step, a street map (drawn from
 // OpenStreetMap by tools/osm-map.mjs) fading into the band with the Darbar marked and a few landmarks named, the
 // guidelines, and the week's temple hours as seven arches with today lit (live.ts).
 // src/data/schedule.json is the one place to edit hours; the day line and the JSON-LD read it too.
@@ -13,7 +13,7 @@ import schedule from '../data/schedule.json';
 import { windowsFor, type Schedule } from '../lib/schedule';
 import { shortSpan } from '../lib/dayline';
 import type { IconName } from './icons';
-import { directionsUrl, fullAddress, site } from '../lib/site';
+import { directionsUrl, fullAddress, linkAttrs, site } from '../lib/site';
 const s = schedule as Schedule;
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const week = DAYS.map((name, day) => ({ name, short: name.slice(0, 3), day, spans: windowsFor(s, day).map(([o, c]) => shortSpan(o, c)) }));
@@ -23,12 +23,12 @@ const week = DAYS.map((name, day) => ({ name, short: name.slice(0, 3), day, span
   <div class="sd-visit">
     <div class="sd-stack">
       <figure class="sd-doorway">
-        <DoorwayFrame><img class="sd-photo" src="/img/darbar-stage.webp" srcset="/img/darbar-stage-800.webp 800w, /img/darbar-stage.webp 1600w" sizes="(min-width: 900px) 560px, 100vw" width="1600" height="900" loading="lazy" decoding="async" alt="The stage at Shirdi Sai Darbar: Baba's murti at the centre between the Shraddha and Saburi panels, with the Dwarkamai and Chavadi murtis on either side" /></DoorwayFrame>
+        <DoorwayFrame><a class="sd-visit-photo" {...linkAttrs(directionsUrl)} aria-label={`Open directions to ${site.name} in Maps`}><img class="sd-photo" src="/img/darbar-front.webp" srcset="/img/darbar-front-800.webp 800w, /img/darbar-front.webp 1600w" sizes="(min-width: 900px) 560px, 100vw" width="1600" height="900" loading="lazy" decoding="async" alt="Shirdi Sai Darbar from San Geronimo Way: a small white shikhara over the gated forecourt, with the temple sign on the lawn" /><span class="sd-visit-photo__chip" aria-hidden="true"><Icon name="map-pin" />Open in Maps</span></a></DoorwayFrame>
         <KolamThreshold />
       </figure>
       <address class="sd-address"><strong>{site.name}</strong><span>{fullAddress}</span></address>
-      <p class="sd-small sd-visit-map__credit">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a></p>
-      <div class="sd-row"><a class="sd-btn sd-btn--primary" href={directionsUrl}><Icon name="navigation-arrow" />Get directions</a></div>
+      <p class="sd-small sd-visit-map__credit">Map data © <a {...linkAttrs('https://www.openstreetmap.org/copyright')}>OpenStreetMap contributors</a></p>
+      <div class="sd-row"><a class="sd-btn sd-btn--primary" {...linkAttrs(directionsUrl)}><Icon name="navigation-arrow" />Get directions</a></div>
     </div>
     <div class="sd-stack">
       <ul class="sd-guides">

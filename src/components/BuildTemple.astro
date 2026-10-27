@@ -5,10 +5,11 @@
 import Icon from './Icon.astro';
 import DoorwayFrame from './DoorwayFrame.astro';
 import SectionHead from './SectionHead.astro';
-import { site } from '../lib/site';
+import { linkAttrs, site } from '../lib/site';
 interface Props { settingsSrc: string }
 const { settingsSrc } = Astro.props;
-const { goal } = site.construction;
+const { goal, vision } = site.construction;
+const short = (n: number) => `$${n / 1e6}M`;
 const tour = site.templeTour;
 ---
 <section class="sd-band sd-band--sunken sd-appeal" id="temple" aria-labelledby="build-h"><div class="sd-band__in sd-appeal__in">
@@ -16,7 +17,7 @@ const tour = site.templeTour;
   <div class="sd-appeal__video">
     <DoorwayFrame>
       <button class="sd-live sd-video" type="button" data-sd-video={tour.id} data-start={tour.start} data-title={tour.title} aria-label="Play the tour of the new temple, on YouTube">
-        <img src="/img/temple-tour.webp" width="940" height="529" alt="" loading="lazy" decoding="async" />
+        <img src="/img/temple-tour.webp" width="1280" height="720" alt="" loading="lazy" decoding="async" />
         <span class="sd-live__play"><Icon name="play" /></span>
         <span class="sd-live__label"><span class="sd-live__title">Tour the new temple</span><span class="sd-live__sub">A walk through the planned marble temple</span></span>
       </button>
@@ -24,14 +25,14 @@ const tour = site.templeTour;
   </div>
   <div class="sd-appeal__meter">
     <div class="sd-meter" data-sd-meter data-src={settingsSrc} data-goal={goal} hidden>
-      <p class="sd-meter__figure"><span class="sd-meter__raised" data-f="raised"></span><span class="sd-meter__of">raised of the $3M immediate goal</span></p>
+      <p class="sd-meter__figure"><span class="sd-meter__raised" data-f="raised"></span><span class="sd-meter__of">raised of the <span data-f="goal">{short(goal)}</span> immediate goal</span></p>
       <div class="sd-meter__track" role="meter" aria-label="Construction fundraising" aria-valuemin="0" aria-valuemax={goal} aria-valuenow="0"><span class="sd-meter__tick" style="left:33.33%" aria-hidden="true"></span><span class="sd-meter__tick" style="left:66.67%" aria-hidden="true"></span><div class="sd-meter__fill" style="--pct:0%"></div></div>
-      <p class="sd-meter__foot"><span data-f="pct"></span><span>Full vision: $10M new temple</span></p>
+      <p class="sd-meter__foot"><span data-f="pct"></span><span>Full vision: {short(vision)} new temple</span></p>
     </div>
     <p class="sd-small sd-appeal__note">Every gift is tax-deductible.</p>
   </div>
   <div class="sd-row sd-row--center">
     <a class="sd-btn sd-btn--primary" href="#give" data-seva-pick="temple"><Icon name="hand-heart" />Donate</a>
-    <a class="sd-btn sd-btn--quiet" href={site.links.donorLevels}>See donor recognition<span class="sd-btn__go"><Icon name="arrow-right" /></span></a>
+    <a class="sd-btn sd-btn--quiet" {...linkAttrs(site.links.donorLevels)}>See donor recognition<span class="sd-btn__go"><Icon name="arrow-right" /></span></a>
   </div>
 </div></section>

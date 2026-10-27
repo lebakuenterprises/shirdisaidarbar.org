@@ -1,6 +1,6 @@
 # Project status
 
-**Updated:** 2026-10-24 · **Branch:** `mvp` · **Current:** M2.7 done → next M3
+**Updated:** 2026-10-25 · **Branch:** `mvp` · **Current:** M3 in progress
 
 ## Milestones
 - [x] M0 Docs: research, spec, architecture, CLAUDE.md, glossary, ADRs
@@ -13,7 +13,7 @@
 - [x] M2.5 Order and two grounds: Live darshan third, Events fifth; ivory and sandal alternating; kolam on hero, Events, footer
 - [x] M2.6 Day and Night hero (DS light photos), bands shifted, shrine on Live, OSM street map on Visit, Give in the nav
 - [x] M2.7 Stage photo in the Visit doorway; labelled OSM map with a Darbar marker; hero capped at 1600px
-- [ ] M3 Live data: Sheet CSVs wired, placeholder build guard, admin guide draft, real photos as event flyers
+- [ ] M3 Live data: Sheet CSVs wired (done), album and volunteer links (done), temple renderings (done), placeholder Seva amounts (done); left: admin guide draft, real photos placed, placeholder build guard check
 - [ ] M4 Demo-ready: Playwright + Lighthouse ≥ 90 ×4, admin guide
 
 ## See it
@@ -22,10 +22,10 @@
 ## Needed from Venkat
 | Item | Needed by | Status |
 |---|---|---|
-| Google Form + Sheet (Events, Settings), each tab published as CSV; URLs into `src/data/site.json` | M3 | waiting |
-| 4–8 temple photos (event flyers, the featured card) | M3 | waiting |
-| WhatsApp Community invite (the channel link stands in), Google Photos album link | launch | channel live; album placeholder |
-| Seva amounts and per-seva PayPal links (to turn on DS presets and Monthly) | launch | ask Ashok |
+| Google Form + Sheet (Events, Settings) | M3 | done, wired; delete the three test rows, add the Oct 31 Suvasini Pooja |
+| Temple photos | M3 | received (front, murti, festivals); placement to decide |
+| WhatsApp Community invite (the channel link stands in), Google Photos album link | launch | channel live; album done |
+| Seva amounts (placeholders shown now) and per-seva PayPal links | launch | Venkat to confirm with Ashok ji |
 | Static map image (4:3 WebP) and confirmed visit-guideline wording | launch | optional |
 
 ## Risks

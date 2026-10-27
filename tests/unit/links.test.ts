@@ -1,5 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { collectPlaceholders, href, isPlaceholder } from '../../src/lib/links';
+import { collectPlaceholders, href, isPlaceholder, opensNewTab } from '../../src/lib/links';
+
+describe('opensNewTab', () => {
+  it('opens links away from this page in a new tab', () => {
+    for (const v of ['https://www.paypal.com/donate', '/privacy', '/pdf/Calendar_2026.pdf', '/img/flyers/a.webp']) expect(opensNewTab(v)).toBe(true);
+  });
+
+  it('keeps places on this page, the home page and phone or mail links in the same tab', () => {
+    for (const v of ['#give', '/#live', '/', 'sms:+14084820089', 'mailto:saiseva@shirdisaidarbar.org', 'tel:+1']) expect(opensNewTab(v)).toBe(false);
+  });
+});
 
 describe('placeholders', () => {
   it('recognises TODO: values', () => {

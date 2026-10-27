@@ -7,7 +7,6 @@ export function startVachan(root: HTMLElement) {
   if (items.length < 2) return;
   const list = root.querySelector('.sd-vachan__list');
   const num = root.querySelector('[data-sd-vachan-n]');
-  const bar = root.querySelector<HTMLElement>('.sd-vachan__bar');
   const pause = root.querySelector<HTMLButtonElement>('.sd-vachan__pause');
   const every = Number(root.dataset.interval) || 9000;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -41,7 +40,7 @@ export function startVachan(root: HTMLElement) {
   }
 
   root.classList.add('is-ready');
-  if (bar) bar.hidden = false;
+  root.querySelectorAll<HTMLElement>('[data-dir]').forEach((b) => { b.hidden = false; });
   if (pause) {
     pause.hidden = reduce;
     pause.addEventListener('click', () => (timer ? stop() : play()));

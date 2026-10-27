@@ -6,6 +6,9 @@ export const isPlaceholder = (v: unknown): v is string => typeof v === 'string' 
 
 export const href = (v: string): string => (isPlaceholder(v) ? '#' : v);
 
+/** Every link opens in a new tab, except a place on this page (#..., /#...), the home page, and sms:, mailto: or tel:. */
+export const opensNewTab = (v: string): boolean => !/^(#|\/#|\/$|sms:|mailto:|tel:)/.test(v);
+
 export function collectPlaceholders(data: unknown, path = ''): { path: string; label: string }[] {
   if (isPlaceholder(data)) return [{ path, label: data.slice(PLACEHOLDER.length).trim() }];
   if (Array.isArray(data)) return data.flatMap((v, i) => collectPlaceholders(v, `${path}[${i}]`));

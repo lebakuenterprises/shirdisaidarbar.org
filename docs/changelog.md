@@ -2,6 +2,16 @@
 
 Format: one entry per milestone, newest first ([Keep a Changelog](https://keepachangelog.com/en/1.1.0/)).
 
+## M3.1 Frames and taps (2026-10-27)
+- The day line now sits on the seam between the hero and the sandal Temple band (no bare strip under it); the hero kolam is whole again.
+- Every link away from the page now opens in a new tab (one rule, `opensNewTab`, tested; recorded in CLAUDE.md).
+- Festival photos sit in carved gold arches with the doorway crown and a kolam step; the featured flyer opens whole in a dialog with its Sponsor button; the Visit photo opens directions.
+
+## M3 Live data, part 1 (2026-10-25)
+- Events and the meter now read the live Google Sheet (Events and Settings tabs, Form for admins); the Google Photos album and a Volunteer with us footer link are set.
+- Goals revised to $10M immediate and $20M vision (the meter says how much is left); the tour video shows the front rendering; Seva options show placeholder suggested amounts until the temple confirms them.
+- Plan your visit shows the Darbar from the street; Live darshan shows Baba in close-up on phones; the assurance arrows sit beside the words; Festivals at the Darbar closes Events; the hero kolam fades out before the day line.
+
 ## M2.7 Stage photo and labelled map (2026-10-24)
 - Plan your visit: the temple's stage photo (WebP, 143 KB and 55 KB for phones) in the doorway; the street map moved under the guidelines, fading into the band, with the Darbar marked by the dhuni mark and named, and Central Expressway, East Arques Avenue and North Fair Oaks Avenue labelled.
 - The hero photo is capped at 1600px and centred on wide screens, so Baba stays beside the words.

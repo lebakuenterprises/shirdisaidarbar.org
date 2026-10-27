@@ -1,32 +1,34 @@
 ---
 // Live darshan and Baba's words, on an ivory band. The Twitch player loads only on tap, at 16:9;
-// "Open on Twitch" opens the channel in a new tab.
+// "Open on Twitch" opens the channel in a new tab. The poster is Baba in close-up (4:5) on phones, the shrine from 600px.
 import Icon from './Icon.astro';
 import SectionHead from './SectionHead.astro';
 import vachan from '../data/vachan.json';
-import { site } from '../lib/site';
+import { linkAttrs, site } from '../lib/site';
 ---
 <section class="sd-band sd-band--live" id="live" aria-labelledby="live-h">
   <div class="sd-band__in sd-sanctum">
     <SectionHead id="live-h" title="Live darshan" lead="Join the aarti from wherever you are." center />
     <div class="sd-sanctum__frame"><svg class="sd-sanctum__crown" viewBox="0 0 160 40" aria-hidden="true" focusable="false"><path class="sd-sanctum__crown-out" d="M0 39.5C34 39.5 52 36 66 24C72 19 76 15 80 10C84 15 88 19 94 24C108 36 126 39.5 160 39.5"></path><path class="sd-sanctum__crown-in" d="M30 39.5C48 38 59 33 68 27C73 23.5 77 20.5 80 17C83 20.5 87 23.5 92 27C101 33 112 38 130 39.5"></path><circle cx="80" cy="4.5" r="2.5"></circle></svg><button class="sd-live" type="button" data-sd-live={site.twitchChannel} aria-label="Watch live darshan on Twitch, with sound">
-      <img src="/img/darbar-shrine.webp" width="1600" height="900" alt="" loading="lazy" decoding="async" />
+      <picture><source media="(min-width: 600px)" srcset="/img/darbar-shrine.webp" width="1600" height="900" /><img src="/img/murti-peacock.webp" width="800" height="1000" alt="" loading="lazy" decoding="async" /></picture>
       <span class="sd-live__play"><Icon name="play" /></span>
       <span class="sd-live__label"><span class="sd-live__title">Watch live darshan</span><span class="sd-live__sub">Streams during the four daily aartis</span></span>
     </button></div>
     <p class="sd-small" data-f="live-next">The stream runs during Kakad, Madhyan, Dhoop and Shej aarti.</p>
-    <a class="sd-btn sd-btn--twitch" href={site.links.twitch} target="_blank" rel="noopener"><Icon name="twitch-logo" />Open on Twitch<span class="sd-sr"> (opens in a new tab)</span></a>
+    <a class="sd-btn sd-btn--twitch" {...linkAttrs(site.links.twitch)}><Icon name="twitch-logo" />Open on Twitch<span class="sd-sr"> (opens in a new tab)</span></a>
     <div class="sd-divider" role="presentation"><Icon name="flower-lotus" /></div>
     <figure class="sd-vachan" data-sd-vachan data-interval="9000">
       <p class="sd-mantra" lang="hi">श्रद्धा सबुरी</p>
-      <ol class="sd-vachan__list" aria-live="off">
-        {vachan.map((v) => <li class="sd-vachan__item"><blockquote><p>{v}</p></blockquote></li>)}
-      </ol>
-      <figcaption>Shri Sai Baba, assurance <span data-sd-vachan-n>1</span> of {vachan.length}</figcaption>
-      <div class="sd-vachan__bar" hidden>
-        <button class="sd-vachan__btn" type="button" data-dir="prev" aria-label="Previous assurance"><Icon name="arrow-left" /></button>
-        <button class="sd-vachan__pause" type="button" aria-pressed="false"><Icon name="pause" /><Icon name="play" /><span>Pause</span></button>
-        <button class="sd-vachan__btn" type="button" data-dir="next" aria-label="Next assurance"><Icon name="arrow-right" /></button>
+      <div class="sd-vachan__stage">
+        <button class="sd-vachan__btn" type="button" data-dir="prev" aria-label="Previous assurance" hidden><Icon name="arrow-left" /></button>
+        <ol class="sd-vachan__list" aria-live="off">
+          {vachan.map((v) => <li class="sd-vachan__item"><blockquote><p>{v}</p></blockquote></li>)}
+        </ol>
+        <button class="sd-vachan__btn" type="button" data-dir="next" aria-label="Next assurance" hidden><Icon name="arrow-right" /></button>
+      </div>
+      <div class="sd-vachan__foot">
+        <figcaption>Shri Sai Baba, assurance <span data-sd-vachan-n>1</span> of {vachan.length}</figcaption>
+        <button class="sd-vachan__pause" type="button" aria-pressed="false" hidden><Icon name="pause" /><Icon name="play" /><span>Pause</span></button>
       </div>
     </figure>
   </div>

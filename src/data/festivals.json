@@ -1,0 +1,25 @@
+{
+  "note": "Festivals at the Darbar (Upcoming events): past festival photos in public/img/festivals/, 480x600 WebP. Each opens the photo album.",
+  "items": [
+    {
+      "name": "Navratri",
+      "img": "/img/festivals/navratri-festival.webp",
+      "alt": "Navratri at the Darbar: Durga with Lakshmi, Saraswati, Ganesha and Kartikeya before glittering arches"
+    },
+    {
+      "name": "Kali Puja",
+      "img": "/img/festivals/kali-pooja.webp",
+      "alt": "Kali Puja at the Darbar: the goddesses dressed in silks before offerings of fruit and flowers"
+    },
+    {
+      "name": "Ganesh Chaturthi",
+      "img": "/img/festivals/ganesh-chaturthi.webp",
+      "alt": "Ganesh Chaturthi at the Darbar: five Ganesha murtis before a carved temple backdrop"
+    },
+    {
+      "name": "Krishnashtami",
+      "img": "/img/festivals/krishnashtami.webp",
+      "alt": "Krishnashtami at the Darbar: Radha and Krishna on a red halo above tiers of fruit and flowers"
+    }
+  ]
+}

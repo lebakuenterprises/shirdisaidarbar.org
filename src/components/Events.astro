@@ -1,15 +1,17 @@
 ---
-// Upcoming events, rendered in the browser from the Sheet's Events tab (src/scripts/events.ts).
+// Upcoming events, rendered in the browser from the Sheet's Events tab (src/scripts/events.ts), then Festivals at the
+// Darbar: past festivals in arches, each opening the photo album.
 import Icon from './Icon.astro';
 import SectionHead from './SectionHead.astro';
-import { site } from '../lib/site';
+import festivals from '../data/festivals.json';
+import { linkAttrs, site } from '../lib/site';
 interface Props { src: string }
 const { src } = Astro.props;
 ---
 <section class="sd-band sd-kolam" id="events" aria-labelledby="events-h"><div class="sd-band__in" data-sd-events data-src={src}>
   <div class="sd-events__head">
     <SectionHead id="events-h" title="Upcoming events" lead="Festivals, pujas and seva days at the Darbar. Every notice reaches WhatsApp first." />
-    <a class="sd-btn sd-btn--secondary" href={site.links.whatsapp}><Icon name="whatsapp-logo" />Join on WhatsApp</a>
+    <a class="sd-btn sd-btn--secondary" {...linkAttrs(site.links.whatsapp)}><Icon name="whatsapp-logo" />Join on WhatsApp</a>
   </div>
   <p class="sd-loading" data-state="loading"><Icon name="flower-lotus" />Loading events</p>
   <div class="sd-events__list" data-state="list" hidden>
@@ -19,14 +21,29 @@ const { src } = Astro.props;
   <div class="sd-empty" data-state="empty" hidden>
     <Icon name="flower-lotus" />
     <p>No events are posted right now. Join us on WhatsApp to hear first.</p>
-    <a class="sd-btn sd-btn--secondary" href={site.links.whatsapp}><Icon name="whatsapp-logo" />Join on WhatsApp</a>
+    <a class="sd-btn sd-btn--secondary" {...linkAttrs(site.links.whatsapp)}><Icon name="whatsapp-logo" />Join on WhatsApp</a>
   </div>
   <div class="sd-notice" role="status" data-state="error" hidden>
     <Icon name="info" />
-    <div><strong>Events could not load just now</strong><span>Please try again in a few minutes, or <a href={site.links.whatsapp}>join us on WhatsApp</a> for every notice.</span></div>
+    <div><strong>Events could not load just now</strong><span>Please try again in a few minutes, or <a {...linkAttrs(site.links.whatsapp)}>join us on WhatsApp</a> for every notice.</span></div>
   </div>
   <noscript><p class="sd-small">Turn on JavaScript to see upcoming events, or join the WhatsApp community below.</p></noscript>
-  <p class="sd-small sd-events__foot"><a href={site.links.calendarPdf}>Download the 2026 temple calendar (PDF)</a></p>
+  <p class="sd-small sd-events__foot"><a {...linkAttrs(site.links.calendarPdf)}>Download the 2026 temple calendar (PDF)</a></p>
+  <div class="sd-festivals">
+    <h3 class="sd-h3">Festivals at the Darbar</h3>
+    <ul class="sd-festivals__list">
+      {festivals.items.map((f) => (
+        <li class="sd-festivals__item"><a {...linkAttrs(site.links.photos)}><span class="sd-festivals__frame sd-kolam"><svg class="sd-doorframe__crown" viewBox="0 0 160 40" aria-hidden="true" focusable="false"><path d="M0 39.5C34 39.5 52 36 66 24C72 19 76 15 80 10C84 15 88 19 94 24C108 36 126 39.5 160 39.5"></path><path d="M30 39.5C48 38 59 33 68 27C73 23.5 77 20.5 80 17C83 20.5 87 23.5 92 27C101 33 112 38 130 39.5"></path><circle cx="80" cy="4.5" r="2.5"></circle></svg><img src={f.img} width="480" height="600" alt={f.alt} loading="lazy" decoding="async" /></span><span class="sd-festivals__step" aria-hidden="true"></span><span>{f.name}</span></a></li>
+      ))}
+    </ul>
+    <a class="sd-btn sd-btn--quiet sd-festivals__more" {...linkAttrs(site.links.photos)}><Icon name="arrow-right" />See all photos</a>
+  </div>
+
+  <dialog class="sd-flyer" data-sd-flyer aria-label="Event flyer">
+    <form method="dialog" class="sd-flyer__bar"><button class="sd-btn sd-btn--quiet" value="close"><Icon name="x" />Close</button></form>
+    <img class="sd-flyer__img" alt="" />
+    <a class="sd-btn sd-btn--primary" data-f="flyer-cta" hidden><Icon name="hand-heart" /><span></span></a>
+  </dialog>
 
   <template data-event-card>
     <article class="sd-card sd-event">
@@ -41,7 +58,7 @@ const { src } = Astro.props;
         <button class="sd-btn sd-btn--quiet" type="button" data-a="calendar"><Icon name="calendar-plus" />Add to calendar</button>
         <a class="sd-btn sd-btn--quiet" data-a="whatsapp"><Icon name="whatsapp-logo" />WhatsApp group</a>
         <a class="sd-btn sd-btn--quiet" data-a="signup"><Icon name="hand-heart" /><span data-f="signup-label">Sponsor</span></a>
-        <a class="sd-btn sd-btn--quiet" data-a="flyer"><Icon name="arrow-right" />See flyer</a>
+        <button class="sd-btn sd-btn--quiet" type="button" data-a="flyer"><Icon name="arrow-right" />See flyer</button>
       </div>
     </article>
   </template>
