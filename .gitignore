@@ -11,3 +11,6 @@ playwright-report/
 
 # Raw downloads from the old site (source material, not shipped)
 images/
+
+# Design-tool working files (impeccable), kept locally
+.impeccable/

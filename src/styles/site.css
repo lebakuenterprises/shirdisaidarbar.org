@@ -79,6 +79,8 @@ abbr[title] { text-decoration: none; }
   .sd-sannidhi::before { height: auto; }
   .sd-sannidhi__kolam { top: 0; right: 50%; z-index: -1; -webkit-mask-image: linear-gradient(to right, #000 55%, transparent); mask-image: linear-gradient(to right, #000 55%, transparent); }
 }
+/* The mantra keeps a line on both sides at every width (the DS drops the leading one from 1100px). */
+@media (min-width: 1100px) { .sd-sannidhi__mantra::before { display: block; } }
 @media (min-width: 1400px), (min-width: 1100px) and (min-resolution: 1.5dppx) {
   .sd-sannidhi__img { background-image: url(/img/murti-hero-wide-light-1920.webp); }
   [data-theme="night"] .sd-sannidhi__img { background-image: url(/img/murti-hero-wide-1920.webp); }
