@@ -114,6 +114,8 @@ iframe.sd-live { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9
 .sd-dayline .sd-today__dot { background: var(--open); }
 .sd-dayline.is-closed .sd-today__dot { background: var(--ink-muted); }
 .sd-dayline.is-live .sd-today__dot { background: var(--live); }
+.sd-dayline__say a[href] { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+.sd-dayline__say a[href]:hover { color: var(--heading); }
 
 .sd-dayline__track { position: relative; height: 112px; margin: 0 var(--space-2); }
 .sd-dayline__thread, .sd-dayline__elapsed { position: absolute; left: 0; top: 50%; height: 2px; margin-top: -1px; border-radius: 2px; }
@@ -127,6 +129,8 @@ iframe.sd-live { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9
 .sd-dayline__stop:not(.is-next) .sd-flame__fire, .sd-dayline__stop:not(.is-next) .sd-flame__core { fill: var(--line-strong); }
 .sd-dayline__stop.is-past { opacity: 0.6; }
 .sd-dayline__stop.is-next::before { background: var(--glow-soft); box-shadow: 0 0 0 1px var(--saffron-ui), var(--shadow-glow); }
+/* During an Aarti the lit diya is now: it carries the lamp's light, centred on it. */
+.sd-dayline.is-live .sd-dayline__stop.is-next::before { box-shadow: 0 0 0 1.5px var(--saffron-ui), 0 0 0 5px color-mix(in oklab, var(--marigold) 40%, transparent), 0 0 22px 8px color-mix(in oklab, var(--marigold) 45%, transparent); }
 .sd-dayline__label { position: absolute; display: grid; white-space: nowrap; font-size: 14px; line-height: 1.3; color: var(--ink-muted); font-variant-numeric: tabular-nums lining-nums; }
 .sd-dayline__label span:first-child { font-weight: 600; color: var(--ink); }
 .sd-dayline__stop.is-next .sd-dayline__label span:first-child { color: var(--heading); }

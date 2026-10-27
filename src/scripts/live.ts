@@ -23,13 +23,17 @@ export function hydrate(root: ParentNode = document, date?: Date) {
     t.classList.toggle('is-closed', s.state === 'closed');
     t.classList.toggle('is-soon', s.soon);
     setText(t, '[data-f="say"]', stateSentence(s));
+    // While an Aarti streams, the sentence takes the visitor to Live darshan (the player waits for a tap there).
+    const say = t.querySelector<HTMLAnchorElement>('[data-f="say"]');
+    if (say) { if (live) say.href = '#live'; else say.removeAttribute('href'); }
 
     // The thread: today's open hours, the elapsed part, and the lamp at now. Before dawn or after close the lamp rests at an end.
+    // During an Aarti the lit diya is now, so the thread ends at its centre and the lamp steps aside rather than glow beside it.
     t.querySelectorAll<HTMLElement>('.sd-dayline__bands').forEach((b) => { b.hidden = !b.dataset.days!.split(' ').includes(String(now.day)); });
-    const at = `${pctAt(now.minutes)}%`;
+    const at = `${pctAt(live ? toMinutes(s.current!.time) : now.minutes)}%`;
     t.querySelectorAll<HTMLElement>('.sd-dayline__elapsed, .sd-dayline__lamp').forEach((el) => el.style.setProperty('--now', at));
     const lamp = t.querySelector<HTMLElement>('.sd-dayline__lamp');
-    if (lamp) lamp.hidden = false;
+    if (lamp) lamp.hidden = live;
     // Lamp light marks only what is now or next; every other diya rests.
     t.querySelectorAll<HTMLElement>('.sd-dayline__stop').forEach((stop) => {
       const isNext = stop.dataset.t === (live ? s.current!.time : s.next.aarti.time) && !(s.next.tomorrow && !live);
