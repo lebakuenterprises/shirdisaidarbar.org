@@ -14,3 +14,9 @@ images/
 
 # Design-tool working files (impeccable), kept locally
 .impeccable/
+
+# Large source files kept locally (the site links to the calendar on the current site)
+/*.pdf
+
+# Claude Code per-user settings
+.claude/settings.local.json

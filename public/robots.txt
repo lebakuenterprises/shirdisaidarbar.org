@@ -1,0 +1,7 @@
+# Shirdi Sai Darbar: every page may be crawled.
+User-agent: *
+Allow: /
+# Sample data for local demos only
+Disallow: /demo/
+
+Sitemap: https://shirdisaidarbar.org/sitemap.xml

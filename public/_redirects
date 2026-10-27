@@ -1,0 +1,51 @@
+# Old shirdisaidarbar.org pages -> the matching part of the new site, so printed QR codes, WhatsApp forwards and
+# Google results keep working. Format: old-path  new-path  status (301 = moved permanently).
+# Section anchors: #temple #live #give #events #visit #contact
+
+# About, activities, temple details, gallery
+/aboutsaibaba.html                                   /                301
+/activities.html                                     /#events         301
+/templatedetails.html                                /#temple         301
+/photogallery.html                                   /#events         301
+
+# Priest services and paid sevas
+/priest.html                                         /#contact        301
+/weekly-monthly-services.html                        /#visit          301
+/priest-service-phase.php                            /#contact        301
+/paid-sevas.html                                     /#give           301
+/annual-abhishekam-sponsor.php                       /#give           301
+
+# Giving and sponsorship
+/robe-sponsor.php                                    /#give           301
+/onetime-donation.html                               /#give           301
+/ways_you_can_donate.html                            /#give           301
+/donation_company_matching.html                      /#give           301
+/all_dp.html                                         /#give           301
+/donation-moorthi-staphana.html                      /#give           301
+/Sponsor-Shirdi-Sai-Baba-Aarthi.html                 /#give           301
+/thursday_sandwitch_seva.html                        /#give           301
+/wall-of-donors.html                                 /#temple         301
+/pledge-newtemple-construction.html                  /#temple         301
+
+# Events
+/upcomingevents.html                                 /#events         301
+/suvasini-puja-2026.html                             /#events         301
+/grand-lord-muruga-shashti-2026.html                 /#events         301
+/monthly-group-satyanarayana-puja-2024.html          /#events         301
+/grand_shri_krishna_janmasthami_and_ganesh_chathurthi_celebration.html  /#events  301
+
+# Contact, directions, signups
+/contact.php                                         /#contact        301
+/direction.html                                      /#visit          301
+/volinteer-signup.php                                /#contact        301
+/devotee-signup.php                                  /#events         301
+
+# Legal pages
+/termsandconditions_shirdisaidarbar.html             /privacy         301
+/disclaimer_shirdisaidarbar.html                     /privacy         301
+/privacy_policy_shirdisaidarbar.html                 /privacy         301
+
+# Old home page addresses
+/index.php                                           /                301
+/home.html                                           /                301
+/index.html                                          /                301

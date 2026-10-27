@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The site's pages. Add a <url> here when a page is added under src/pages (404 stays out). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://shirdisaidarbar.org/</loc></url>
+  <url><loc>https://shirdisaidarbar.org/privacy</loc></url>
+</urlset>

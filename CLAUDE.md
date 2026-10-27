@@ -15,7 +15,7 @@ One-page, mobile-first website for Shirdi Sai Darbar (Sunnyvale), a static Astro
 - `npx playwright test`: smoke tests against `npm run preview`
 - `node tools/tokens-to-css.mjs`: regenerate `src/styles/tokens.css` after replacing `design-system/tokens.json`
 - `node tools/osm-map.mjs`: redraw `public/img/visit-map.svg` from OpenStreetMap (only if the temple moves)
-- Hosting: Cloudflare Workers static assets (`wrangler.jsonc`), built by Workers Builds on every push to `mvp`.
+- Hosting: Cloudflare Workers static assets (`wrangler.jsonc`), built by Workers Builds on every push to `mvp`. `public/_redirects` maps old-site URLs; `public/sitemap.xml` lists pages by hand (add new pages there).
 - Set `ASTRO_TELEMETRY_DISABLED=1` in CI. New dependencies: exact versions at least 2 weeks old.
 
 ## Hard rules

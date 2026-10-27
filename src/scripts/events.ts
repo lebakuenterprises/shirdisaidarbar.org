@@ -1,5 +1,6 @@
 // Upcoming events: fetch the Events CSV, then show cards, the empty state or the could-not-load notice.
 import { parseEvents, visibleEvents, type SdEvent } from '../lib/events';
+import { eventLd } from '../lib/event-ld';
 import { buildIcs } from '../lib/ics';
 import { fullAddress, site } from '../lib/site';
 import { addDays, dateTile, formatDateLong, formatTime, templeNow } from '../lib/time';
@@ -130,6 +131,11 @@ export async function startEvents(root: HTMLElement) {
     root.querySelector('[data-f="featured"]')!.replaceChildren(lit(feature(card(tpl, first!, today), first!), first!));
     root.querySelector('[data-f="grid"]')!.replaceChildren(...rest.map((e) => lit(card(tpl, e, today), e)));
     show(root, 'list');
+    // The same Events as schema.org data for search.
+    const ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.textContent = JSON.stringify(events.map((e) => eventLd(e, { name: site.name, ...site.address }, site.url)));
+    document.head.append(ld);
     // A WhatsApp link to /#event-... arrives before the card exists; scroll once it does.
     if (location.hash.startsWith('#event-')) document.getElementById(location.hash.slice(1))?.scrollIntoView();
   } catch {

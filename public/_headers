@@ -1,0 +1,5 @@
+# Cache rules (Cloudflare reads this file). HTML stays fresh; the page reads the Sheet live anyway.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+/img/*
+  Cache-Control: public, max-age=604800
